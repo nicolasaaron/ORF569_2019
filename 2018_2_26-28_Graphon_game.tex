@@ -1,0 +1,426 @@
+\subsection{cut norms}
+
+\begin{definition}
+	The cut norm of a graphon $W \in \tilde{\mathcal{W}}$ is denoted by $\Vert W \Vert_{\Box}$ and is defined as follows:
+	\begin{equation}
+	\Vert W \Vert_{\Box} = \sup_{D_1, D_2 \in [0,1]} \left\vert \int_{D_1 \times D_2} W(x,y) dx dy\right\vert
+	\end{equation}
+	where $D_1, D_2$ are measurable subsets of $[0,1]$. The cut metric between two graphons $V,W \in \tilde{\mathcal{W}}$ is given by
+	$$
+	d_\Box(W,V) = \inf_{\pi \in \prod_{[0,1]} } \Vert W^{\pi} - V \Vert_{\Box},
+	$$
+	where $W^{\pi}(x,y) = W(\pi(x), \pi(y))$ and $\prod_{[0,1]}$ is the class of measure preserving permutations $\pi: [0,1] \to [0,1]$.
+\end{definition}
+
+\begin{remark}
+	By Monotonicity argument, we can have
+	$$
+	\Vert W \Vert_{\Box} = \sup_{0 \leq f \leq 1, 0 \leq g \leq 1} \left\vert \int \int f(x)g(y) w(x,y) dx dy \right\vert.
+	$$
+\end{remark}
+
+Because of the permutation function $\phi$, the mapping $d_\Box$ is not a well defined metric in $\tilde{\mathcal{W}}$. We define the space $\mathcal{W} = \tilde{\mathcal{W}} / \sim$
+where the equivalent relation $\sim$ on $\tilde{W}$ is defined by
+$$
+V \sim W \text{ if there exists } \pi \in \prod\,_{[0,1]} \text{   such that } V = W^{\pi}.
+$$
+Namely, we identify graphons up to measure preserving permutations. THus, the space $(\mathcal{W}, d_\Box)$ is a well defined metriczable vector space.
+
+\begin{proposition}
+	The space $(\mathcal{W}, d_\Box)$ is complete.
+\end{proposition}
+
+\begin{lemma} (\cite{janson2010graphons} Theorem E.6)
+	Given a graphon $W \in \mathcal{W}$ and the associating graphon operator $A^W$, if $|W| = \int W(x,y) dy \leq 1$, then we have for any $p,q \in [1,\infty]$ and $q' = (1- 1/q)^{-1}$,
+	$$
+	\Vert W \Vert_{\Box} \leq \Vert A^W \Vert_{L^p, L^q} \leq \sqrt{2} (4 \Vert W \Vert_{\Box})^{(1-\frac{1}{p}) \wedge \frac{1}{q}}
+	$$
+	where
+	$$ \Vert A^W \Vert_{L^p, L^q} =  \sup_{ \Vert f\Vert_{L^p} \leq 1} \Vert A^W f \Vert_{L^q} = \sup_{ \Vert f \Vert_{L^p} \leq 1}\, \sup_{ \Vert g \Vert_{L^{q'}}  \leq 1} \left\vert \int A^W f(x) \, g(x) dx \right\vert.
+	$$	
+	A special case is when $p=q=2$, then we have
+	$$
+	\Vert W \Vert_{\Box} \leq \Vert A^W \Vert_{L^2, L^2} \leq \sqrt{8 \Vert W \Vert_{\Box}}.
+	$$	
+	\label{lemma:cut_norm_ineq}
+\end{lemma}
+
+
+The proof of Lemma \ref{lemma:cut_norm_ineq} relies on the Riesz-Thorin interpolation theorem and the inequality $$	\Vert W \Vert_{\Box} \leq \Vert A^W \Vert_{L^{\infty}, L^1} \leq 4 \Vert W \Vert_{\Box}.$$
+We first recall the Riesz-Thorin interpolation theorem: 
+\begin{theorem}(Riesz-Thorin interpolation theorem)\\
+	Suppose $(p_0, q_0), (p_1, q_1)  \in [1,\infty] \times [1, \infty]$ and for some $r \in (0,1)$ such that
+	$$ \left( \frac{1}{p}, \frac{1}{q} \right) = r  \left(\frac{1}{p_0}, \frac{1}{q_0} \right) + (1-r) \left( \frac{1}{p_1}, \frac{1}{q_1} \right).$$
+	Consider a linear function $T$ that maps $L^{p_0}( (X, \mu), \mathbb{C})+ L^{p_1}( (X, \mu), \mathbb{C})$ into $L^{q_0}((Y, \nu), \mathbb{C}) + L^{q_1}( (Y, \nu), \mathbb{C})$, where $(X,\mu)$ and $(Y,\nu)$ are two measurable spaces. If $q_0 = q_1 = \infty$, we further suppose that the measure $\nu$ is semifinite.
+	If we assume that there exists two constants $M_0, M_1 >0$ such that
+	$$
+	\Vert T f \vert_{L^{q_0}} \leq M_0 \Vert f \Vert_{L^{p_0}}, \qquad \forall \, f\in L^{p_0}( (X,\mu), \mathbb{C})
+	$$
+	and 
+	$$
+	\Vert T f \vert_{L^{q_1}} \leq M_1 \Vert f \Vert_{L^{p_1}}, \qquad \forall \, f\in L^{p_1}( (X,\mu), \mathbb{C}),
+	$$
+	then $T$ is bounded on $L^p$ and furthermore, 
+	$$
+	\Vert T f \Vert_{L^q} \leq M_0^{1-r} M_1^{r} \Vert f \Vert_{L^{p}}
+	$$
+	for any complex-value function $f \in L^{p}(X,\mu, \mathbb{C})$.
+\end{theorem}
+
+\begin{lemma}
+	$$
+	\Vert W \Vert_{\Box} \leq \Vert A^W \Vert_{L^{\infty}, L^1} \leq 4 \Vert W \Vert_{\Box}.
+	$$
+\end{lemma}
+\begin{proof}
+	\begin{eqnarray}
+	\Vert A^W \Vert_{L^\infty, L^1} &=& \sup_{ \Vert f \Vert_{L^\infty} \leq 1}\, \sup_{ \Vert g \Vert_{L^{\infty}}  \leq 1}  \left\vert \int A^W f(x) g(x) dx  \right\vert \nonumber \\
+	&=& \sup_{ -1 \leq f \leq 1} \sup_{-1 \leq g \leq 1 }  \left\vert \int \int W(x,y)f(y) g(x) dxdy \right\vert \label{eq:cut_ineq_p_infty_q_1_lower}
+	\end{eqnarray}
+	Take $f= \mathbbm{1}_{D_1}$ and $g=\mathbbm{1}_{D_2}$ for $D_1, D_2 \subset [0,1]$, then we have
+	$$
+	\Vert A^W \Vert_{L^\infty, L^1} \geq \Vert W \Vert_{\Box}.
+	$$
+	
+	We can introduce two functions $f_1,f_2$ valued in $[0,1]$ such that $f= f_1- f_2$, as well as $g_1,g_2$ such that $g=g_1 - g_2$. Thus,
+	\begin{equation}
+	\Vert A^W \Vert_{L^\infty, L^1} = \sup_{ 0 \leq f_1, f_2 \leq 1 }\, \sup_{ 0 \leq g_1, g_2 \leq 1} \left\vert \int \int W(x,y)[f_1(y)- f_2(y)]\cdot [g_1(x) - g_2(x)] dxdy \right\vert
+	\label{eq:cut_ineq_p_infty_q_1_upper}
+	\end{equation}
+	Since
+	\begin{eqnarray*}
+		&& \left\vert \int \int W(x,y)[f_1(y)- f_2(y)]\cdot [g_1(x) - g_2(x)] dxdy \right\vert \\
+		&=& \left\vert \langle A^W (f_1 - f_2), (g_1-g_2) \rangle \right\vert \\
+		&=& \left\vert \langle A^W f_1, g_1 \rangle + \langle A^W f_2, g_2 \rangle - \langle A^W f_2, g_1 \rangle - \langle A^W f_1, g_2 \rangle \right\vert \\
+		&\leq& | \langle A^W f_1, g_1 \rangle | + | \langle A^W f_2, g_2 \rangle | + | \langle A^W f_2, g_1 \rangle | + | \langle A^W f_1, g_2 \rangle| 
+	\end{eqnarray*}
+	We have
+	$$
+	\Vert A^W \Vert_{L^\infty, L^1} \leq \sup_{ 0 \leq f_1, f_2 \leq 1 }\, \sup_{ 0 \leq g_1, g_2 \leq 1} | \langle A^W f_1, g_1 \rangle | + | \langle A^W f_2, g_2 \rangle | + | \langle A^W f_2, g_1 \rangle | + | \langle A^W f_1, g_2 \rangle|  = 4 \Vert W \Vert_{\Box}.
+	$$
+\end{proof}
+
+
+\begin{proof}(for Lemma \ref{lemma:cut_norm_ineq})
+We show in the first place that $\Vert W \Vert_{\Box} \leq \Vert A^W \Vert_{L^{p}, L^{q} }$. Since $L^{\infty}([0,1], dx) \subset L^p([0,1], dx)$ and $L^{q}([0,1], dx) \subset L^1([0,1],dx)$, we have
+\begin{eqnarray*}
+	\Vert A^W \Vert_{L^{p}, L^{q}} &=& \sup_{ \Vert f \Vert_{L^{p}} \leq 1 } \Vert A^W f \Vert_{L^{q} }\\
+	&\geq & \sup_{ \Vert f \Vert_{L^\infty} \leq 1 } \Vert A^W f \Vert_{L^{q}} \\
+	& \geq & \sup_{ \Vert f \Vert_{L^\infty} \leq 1 } \Vert A^W f \Vert_{L^1} \\
+	&=& \Vert A^W \Vert_{L^{\infty}, L^1}\\
+	&\geq& \Vert W \Vert_{\Box}
+\end{eqnarray*}
+	
+For the upper bound, we let $r = (1-\frac{1}{p})\wedge \frac{1}{q}$, then $1-r = \frac{1}{p} \vee (1-\frac{1}{q})$. We define $p_1 =  (1-r)p$ and $q_1 = \left(1 - (1-r)^{-1} ( 1- 1/ q) \right)^{-1}$. then $\overline{p}, \overline{q} \in [1,\infty]$. Thus, with $p_0 = \infty$ and $q_0 = 1$, we have
+$$
+	\left( \frac{1}{p}, \frac{1}{q} \right) = r  \left(\frac{1}{p_0}, \frac{1}{q_0} \right) + (1-r) \left( \frac{1}{p_1}, \frac{1}{q_1} \right).
+$$
+Then by applying Riesz-Thorin interpolation theorem, we obtain
+$$
+	\Vert A^W \Vert_{L^{p}, L^{q} } \leq 	\Vert A^W \Vert_{L^{p}(\mathbb{C}), L^{q}(\mathbb{C}) } \leq \left( \Vert A^W \Vert_{L^{\infty}(\mathbb{C}), L^1(\mathbb{C})} \right)^r \cdot \left( \Vert A^W \Vert_{L^{p_1}(\mathbb{C}), L^{q_1}(\mathbb{C}) } \right)^{1-r}.
+$$
+where $L^{\infty}(\mathbb{C}), L^{1}(\mathbb{C}), L^{p_1}(\mathbb{C}), L^{q_1}(\mathbb{C})$ are complex-value function spaces extended from the corresponding function spaces.
+
+We can easily see that
+\begin{eqnarray*}
+	\Vert A^W \Vert_{L^\infty(\mathbb{C}), L^1(\mathbb{C})} 
+	&=& \sup_{\stackrel{ f: [0,1] \to \mathbb{C}}{\Vert f \Vert_{L^\infty} \leq 1} }  \sup_{\stackrel{ g: [0,1] \to \mathbb{C}}{\Vert g \Vert_{L^\infty} \leq 1} } \left\vert \int \int W(x,y) f(y) g(x) dy dx \right\vert \\
+	&\leq&  2 \Vert A^W \Vert_{L^{\infty}, L^1} 
+\end{eqnarray*}
+Indeed, this inequality can be improved to a constant $\sqrt{2}$ (see \cite{krivine1979constantes})
+$$
+	\Vert A^W \Vert_{L^\infty(\mathbb{C}), L^1(\mathbb{C})} \leq  \sqrt{2} \Vert A^W \Vert_{L^{\infty}, L^1}
+$$
+
+For any $p_1,q_1 \in [1,\infty]$,
+\begin{eqnarray*}
+	\Vert A^W \Vert_{L^{p_1}(\mathbb{C}), L^{q_1}(\mathbb{C})} &=& \sup_{ \Vert f \Vert_{L^{p_1}(\mathbb{C})} \leq 1 } \Vert A^W f \Vert_{L^{q_1}(\mathbb{C}) }\\
+	&\leq & \sup_{ \Vert f \Vert_{L^1(\mathbb{C})} \leq 1 } \Vert A^W f \Vert_{L^{q_1}(\mathbb{C})} \\
+	& \leq & \sup_{ \Vert f \Vert_{L^1(\mathbb{C})} \leq 1 } \Vert A^W f \Vert_{L^{\infty}(\mathbb{C})} \\
+	&=& \Vert A^W \Vert_{L^{1}(\mathbb{C}), L^\infty(\mathbb{C})}
+\end{eqnarray*}
+where the first inequality is justified by $L^1([0,1], dx, \mathbb{C}) \subset L^{p_1}([0,1], dx, \mathbb{C}) $ and the second inequality comes from $\Vert f \Vert_{L^{q_1}(\mathbb{C})} \leq \Vert f \Vert_{L^\infty(\mathbb{C})}$.
+Moreover,
+\begin{eqnarray*}
+	\Vert A^W \Vert_{L^1(\mathbb{C}), L^\infty(\mathbb{C})} &=& \sup_{ f: [0,1] \to \mathbb{C},\, \Vert f \Vert_{L^1} \leq 1 } \Vert A^W f \Vert_{L^\infty(\mathbb{C})}\\
+	&= &  \sup_{ \stackrel{f: [0,1] \to \mathbb{C}}{ \Vert f \Vert_{L^1} \leq 1} }  \sup_{ \stackrel{g: [0,1] \to \mathbb{C}}{\Vert g \Vert_{L^1} \leq 1} }  \left\vert \int \int W(x,y)f(y) g(x) dy dx \right\vert \\
+	&\leq& \sup_{ f: [0,1] \to \mathbb{C}, \,  \Vert f \Vert_{L^1} \leq 1 }  \left\vert \int \sup_{ g: [0,1] \to \mathbb{C}, \,  \Vert g \Vert_{L^1} \leq 1 } \left\vert \int W(x,y)g(x)dx \right\vert \cdot  f(y) dy \right\vert \\
+	&\leq& \sup_{ f: [0,1] \to \mathbb{C}, \,  \Vert f \Vert_{L^1} \leq 1 } \Vert W \Vert_{L^\infty(\mathbb{C})} \cdot  \int \vert f(y)  \vert dy \\
+	&=&  \Vert W \Vert_{L^\infty(\mathbb{C})} \\
+	&=& ess\sup_{x \in [0,1]} \left\vert \int W(x,y) dy \right\vert \\
+	&\leq & 1
+\end{eqnarray*}
+where the second inequality comes from Fubini's theorem and the last inequality comes from the assumption on graphon kernel $|W| \leq 1$.
+
+Hence, with the fact that $\sqrt{2}^r \leq \sqrt{2}$ and $\Vert A^W \Vert_{L^{\infty}, L^1} \leq 4 \Vert W \Vert_{\Box}$, we conclude that
+$$
+	\Vert A^W \Vert_{L^{p}, L^{q}} \leq \sqrt{2} \left( 4 \Vert W \Vert_{\Box} \right)^{\min \{ 1- \frac{1}{p}, \, \frac{1}{q} \} }.	
+$$	
+\end{proof}
+
+\subsection{Centrality measure}
+An extension of Bonacich measure. Far a graphon $W \in \cW$ associated with an operator $A^W$ and a value $\alpha \in \mathbb{R}$. Assume that $\alpha \in [0, \frac{1}{\rho(A^W)} )$, and we define a mapping $b_\alpha$ by
+\begin{equation}
+\begin{array}{rccl}
+	b_\alpha: &[0,1] &\longrightarrow & \mathbb{R}\\
+	& x & \mapsto & b_\alpha(x) := \left( \left[ \mathbb{I} - \alpha A^W ]^{-1} 1_{[0,1]} \right] \right)(x)
+\end{array}
+\end{equation}
+The function $b_\alpha$ is called Bonacich centrality function.
+
+
+\subsection{some words on the mean field interaction}
+
+Graphon games are with an infinity of players. We can look at N player games and consider the case when $N \to \infty$. We assume that players are symmetric. Let us denote by $A$ the set of admissible controls for a single player where $A$ is some subset in $\mathbb{R}$.  For any strategy profile $\balpha \in (A)^N$, recall that the cost function associated to player $i$ is defined by
+\begin{equation}
+	J^i(\balpha) = J^i(\alpha^i, (\alpha^1, \ldots, \alpha^{i-1}, \alpha^{i+1}, \ldots, \alpha^N)) = J^i(\alpha, \balpha^{-i})
+\end{equation}
+
+An important special case is when $J^i$ is symmetric with respect to all the $\alpha^j$, $j\neq i$. Indeed, in this case, we can rewrite the cost function for player $i$ into a new cost function $\tilde{J}^i$ which involves a mean filed interaction term. More precisely, we have
+\begin{equation}
+	J^i(\alpha, \balpha^{-i}) = \tilde{J}^i\left(\alpha^i, \frac{1}{N-1} \sum_{j\neq i} \delta_{\alpha^j} \right) = \tilde{J}^i\left(\alpha^i, \mu^{\balpha^{-i}} \right)
+\end{equation}
+where $\mu^{\balpha^{-i}} := \frac{1}{N-1} \sum_{j\neq i} \delta_{\alpha^j} \in \mathcal{P}_2(A)$ is a squared integrable measure on $A$ and $\tilde{J}^i : A \times \mathcal{P}_2(A) \ni (\alpha, \mu) \mapsto J^i(\alpha, \mu) \in \mathbb{R}$ represents the new cost function associated to player $i$.\\
+
+\textbf{Example: ``Where do we put the towel on the beach?"  }
+
+There are $N$ players, $A$ is a compact set of $\mathbb{R}$ and for player $i$, her control $\alpha^i \in A$ represents her position on the beach. Let $d: A \times A \to \mathbb{R}$ be a distance function. For player $i$, her cost function $J^i$ takes the form
+$$
+	J^i(\balpha) = a \cdot d(\alpha^i, \alpha_0) - b \cdot \frac{1}{N-1} \sum_{j \neq i} d(\alpha^i, \alpha^j)
+	= a \cdot d(\alpha^i, \alpha_0) - b \cdot \int_{A} d(\alpha^i, \alpha) \mu^{\balpha^{-i}}(d\alpha)
+$$
+where $a, b > 0$ and $\alpha_0 \in A$ is the preferred position for all players.
+
+The objective is to solve for $ONE$ typical player when she plays against the distribution of all other players.
+
+The best response function is defined as
+$$
+	\hat{\alpha} : \mathcal{P}_2(A) \ni \mu \mapsto \arginf_{\alpha \in A} J(\alpha, \mu)  \subseteq A 
+$$
+and a Nash equilibrium is defined as a distribution $\hat{\mu} \in \mathcal{P}_2(A)$ that satisfies the fixed point argument:
+$$
+	\supp(\hat{\mu}) \subseteq \hat{\alpha}(\hat{\mu}),
+$$
+where $\supp(\mu)$ stands for the support of a distribution $\mu\in \mathcal{P}_2(A)$. 
+
+
+
+\subsection{Graphon game}
+
+In finite player games, players can be enumerated by a finite set of numbers, say $\{1, \ldots, N\}$ for example, and, a strategy profile can be by a vector $\balpha =(\alpha_1, \ldots, \alpha_N) \in A^1 \times \ldots A^N$ with $A^i \subseteq \mathbb{R}^k$. Now, when dealing with Graphon games, we consider a continuum of players such that a single player is represented by a real number $x\in [0,1]$, whilst a strategy profile turns out to be a squared integrable mapping $\balpha : [0,1] \ni x \mapsto \balpha(x) \in R^k$. The set of feasible strategies for player $x\in[0,1]$, denote by $A(x)$ is a subset of $\mathbb{R}^{k}$, and the collection of all feasible strategy sets among players is denote by $A = \{A(x)\}_{x\in [0,1]}$. We can also define the set of admissible strategy profiles as 
+$$
+\mathcal{A} = \left\{ \balpha \in L^{2}([0,1], \mathbb{R}^k) \, : \quad \forall x \in [0,1], \, \balpha(x) \in A(x) \right\}.
+$$
+
+
+In finite Network game, player $i$ feels the interaction from player $j$ through the Adjacency matrix $A^{(G)}$, and the local aggregated perceived by player $i$ can be modeled through a term 
+$$
+	z^i(\balpha) = \frac{1}{N-1} \sum_{j \neq i} A_{ij}^{(G)} \alpha^j.
+$$
+Similarly, in Graphon games, we define the local aggregate of interaction perceived by player $x \in [0,1]$ with respect to a strategy profile $\balpha = (\balpha_1,\ldots, \balpha_k)^\top \in L^2([0,1], \mathbb{R}^k)$ by
+$$
+	z(x | \balpha) = \int_{0}^{1} W(x,y) \balpha(y) dy \in \mathbb{R}^k
+$$
+where $z(x|\balpha)_j = \int_{[0,1]} W(x,y) \balpha_j(y) dy =( A^W \balpha_j )(x)$ for every $j=1, \ldots, k$ and every $x\in [0,1]$.
+
+We define a new graphon operator $\mathbb{A}^W: L^2([0,1], \mathbb{R}^k) \to L^2([0,1], \mathbb{R}^k)$ such that for any strategy profile $\balpha \in L^2([0,1], \mathbb{R}^k)$ and for any $x \in [0,1]$, we have
+$$
+	\left( \mathbb{A}^W \balpha \right)(x) := z(x | \balpha) = \left[ \begin{array}{c} A^W \balpha_1 (x) \\ \vdots \\ A^W \balpha_k (x)  \end{array} \right].
+$$
+
+For player $x \in [0,1]$, her cost function is defined by 
+$$
+J^x: A(x) \times \mathcal{A} \ni (\alpha' , \balpha) \mapsto J(\alpha', z(x|\balpha))
+$$
+where $J: \mathbb{R}^k \times \mathbb{R}^k \ni (\beta, z) \mapsto J(\beta,z) \in \mathbb{R}$ is a predefine cost function for the graphon game. 
+
+\begin{definition}
+	A graphon game $\mathcal{G}(A, J, W)$ is defined in terms of a continuum set of players indexed by $[0,1]$, a graphon $W \in \mathcal{W}$, a cost functions $J(\cdot, \cdot)$, and a collection of feasible strategy sets $A = \{A(x)\}_{x \in [0,1]}$. 
+\end{definition}
+
+The best response function for player $x\in [0,1]$ in a graphon game is define as a set value function
+$$
+	\underline{\alpha}_{BR}^x : \mathcal{A} \ni \balpha \mapsto \arginf_{\beta \in A(x)} J(\beta, z(x|\balpha))
+$$
+An admissible strategy $\balpha^* \in \mathcal{A}$ is a Nash equilibrium if it satisfies a fixed point condition:
+$$
+\balpha^*(x) \in \underline{\alpha}^x_{BR}(\balpha^*) \quad \textbf{for all } x \in [0,1], 
+$$
+in another words, for every $x \in [0,1]$, 
+$$
+	J(\balpha(x), z(x | \balpha^*)) \leq J( \alpha', z(x|\balpha^*) ), \qquad \alpha' \in A(x).
+$$
+
+
+
+\begin{remark}
+If we assume that for any $z \in \mathbb{R}^k$, there exists a unique minimum for the mapping $\beta \mapsto J(\beta, z)$, then we can see that the best response function for graphon game $\mathcal{G}(A,J,W)$ as a function from $\mathcal{A}$ to $\mathcal{A}$ such that
+$$
+	\underline{\alpha}_{BR} : \mathcal{A} \ni \balpha \mapsto \left(x \mapsto \arginf_{\beta \in A(x) } J\left(\beta, z(x | \balpha) \right) \right).
+$$
+
+Since $\balpha \in \mathcal{A} \subseteq L^2([0,1], \mathbb{R}^k)$, we need to show that $\underline{\alpha}_{BR}$ does not depend on the representation of $\balpha$ and it is also squared integrable on $[0,1]$. This first point can be shown from the fact that $\mathbb{A}^W\balpha$ is independent of the choice of representative $\balpha$ in $L^2([0,1], \mathbb{R}^d)$. The second point can be justified assuming the feasible strategy set $A(x)$ is a subset of a compact set $A_{comp}$ of $\mathbb{R}^k$. 
+\end{remark}
+
+\ \\
+Example: Min-Max graphon: let $W(x,y) = x \wedge y (1- x \vee y)$ for any $(x,y) \in [0,1]\times [0,1]$.
+
+
+\begin{remark}
+	If $f \in ker(A^W - \lambda I)$, then $(f, 0,0,\ldots,0)$ is an eigenvector of $\mathbb{A}^W$ corresponded to the eigenvalue $\lambda$.
+\end{remark}
+
+
+\subsubsection{existence result}
+
+\begin{assumption}\ 
+	\begin{enumerate}
+	%	\item $A(x) = \mathbb{R}^k$ for every $x \in [0,1]$.
+		\item The function $J : \mathbb{R}^k \times \mathbb{R}^k \ni (\alpha,z)\to J(\alpha,z) \in \mathbb{R}$ is continuously differentiable and strongly convex in $\alpha$ with a uniform constant $l_c > 0$ for every $z \in \mathbb{R}^k$. Namely, for every $\alpha', \alpha \in \mathbb{R}^k$ and $z \in \mathbb{R}^k$, we have for every $b \in [0,1]$
+		$$
+			J(b \alpha + (1-b) \alpha' , z) \leq b J(\alpha,z) + (1-b) J(\alpha', z) - \frac{l_c}{2} b (1-b) \Vert \alpha' - \alpha \Vert^2 .
+		$$
+		\item $\nabla_\alpha J(\alpha, z)$ is Lipschitz in $z$ with a uniform constant $l_J$ for every $\alpha \in \mathbb{R}^k$. Namely, for every $z',z \in \mathbb{R}^d$ and for every $\alpha \in \mathbb{R}^k$, we have
+		$$
+			\Vert \nabla_\alpha J(\alpha, z') - \nabla_\alpha J(\alpha, z) \Vert \leq l_J \Vert z' - z \Vert.
+		$$		
+		\item For every $x\in [0,1]$, the set of feasible strategy $A(x)$ is closed and convex. 
+	\end{enumerate}
+\label{assumption:Garphon_games_1}
+\end{assumption}
+
+
+ 
+\begin{definition}
+	We define an operator $\mathbb{B}: L^2([0,1], \mathbb{R}^k) \ni \tilde{z} \mapsto \mathbb{B}\tilde{z} \in L^2([0,1], \mathbb{R}^k)$ such that  for every $x \in [0,1]$
+	$$	
+		\mathbb{B}\tilde{z}(x) = \arginf_{\alpha \in A(x)} J(\alpha, \tilde{z}(x)).
+	$$
+\end{definition}
+
+We can see that
+$$
+	\balpha \text{ is a Nash Equilibrium} \Longleftrightarrow \balpha \text{ is a fixed point of } \mathbb{B} \mathbb{A}^W.
+$$
+
+\begin{remark}
+	$\mathbb{B}$ is not a linear operator.
+\end{remark}
+
+\begin{lemma}
+Under assumption \ref{assumption:Garphon_games_1}, we can show that $\mathbb{B}$ is Lipschitz. More precisely, for every $f,g \in L^2([0,1], \mathbb{R}^k)$,
+$$
+	\Vert \mathbb{B} f - \mathbb{B} g \Vert_{L^2} \leq \frac{l_J}{l_c} \Vert f - g \Vert_{L^2}.
+$$
+\label{lemma:continuity_of_B}
+\end{lemma}
+
+\begin{proof}
+	Under the strong convexity assumption, we know that for every $f \in L^2([0,1], \mathbb{R}^k)$ and every $x \in [0,1]$, the set $\mathbb{B}f(x)$ that minimizes $J(\cdot, f(x))$ is a singleton. By the abuse of terminology, we still denote it by $\mathbb{B}f(x)$.
+	
+	By variation inequality, the strong convexity of $J$ in $\alpha$ implies that for every $f,g \in L^2([0,1], \mathbb{R}^k)$ and $x \in [0,1]$, 
+	\begin{eqnarray*}
+		\langle \nabla_\alpha J(\mathbb{B}f(x), f(x)) , \, \mathbb{B}g(x)- \mathbb{B}f(x)  \rangle&\geq & 0 \\
+		\langle \nabla_\alpha J(\mathbb{B}g(x), g(x)) , \, \mathbb{B}f(x)- \mathbb{B}g(x) \rangle &\geq & 0.
+	\end{eqnarray*}
+	We add up these two inequalities and obtain that
+	\begin{eqnarray*}
+		&&\langle \nabla_\alpha J(\mathbb{B}f(x), f(x)) - \nabla_\alpha J(\mathbb{B}f(x), g(x) ) , \,   \mathbb{B}g(x)- \mathbb{B}f(x) \rangle  \\
+		&\geq& 	\langle \nabla_\alpha J(\mathbb{B}g(x),  g(x)) - \nabla_\alpha J(\mathbb{B}f(x), g(x) ) ,\,  \mathbb{B}g(x)- \mathbb{B}f(x) \rangle
+	\end{eqnarray*}
+	The strong convexity of $J$ in $\alpha$ also implies the strong monotonicity of $\nabla_\alpha J$ in $\alpha$, namely for any $\alpha, \alpha', z \in \mathbb{R}^k$,
+	$$
+		\langle \nabla_\alpha J(\alpha, z) - \nabla_\alpha J(\alpha',z),\, \alpha - \alpha' \rangle \geq l_c \Vert \alpha - \alpha' \Vert^2
+	$$
+	Thus, we have
+	\begin{eqnarray*}
+		&& \Vert \nabla_\alpha J(\mathbb{B}f(x), f(x)) - \nabla_\alpha J(\mathbb{B}f(x), g(x) )  \Vert \cdot \Vert  \mathbb{B}g(x)- \mathbb{B}f(x) \Vert  \\
+		&\ge & 	\langle \nabla_\alpha J(\mathbb{B}f(x), f(x)) - \nabla_\alpha J(\mathbb{B}f(x), g(x) ) , \,   \mathbb{B}g(x)- \mathbb{B}f(x) \rangle \\
+		& \geq & \langle \nabla_\alpha J(\mathbb{B}g(x),  g(x)) - \nabla_\alpha J(\mathbb{B}f(x), g(x) ) ,\,  \mathbb{B}g(x)- \mathbb{B}f(x) \rangle \\
+		&\geq & l_c \Vert \mathbb{B}g(x) - \mathbb{B}f(x) \Vert^2
+	\end{eqnarray*}
+	where the first inequality is justified by the Cauchy-Schwartz inequality.
+	
+	Since $\nabla_\alpha J$ is Lipschitz in $z$, so we can have
+	$$
+		\Vert \mathbb{B}g(x) - \mathbb{B}f(x) \Vert \leq \frac{l_J}{l_c} \Vert f(x) - g(x) \Vert 
+	$$
+	Hence, 
+	\begin{equation*}
+		\Vert  \mathbb{B}g - \mathbb{B}f \Vert^2_{L^2} = \sum_{i=1}^k \int_{[0,1]} \left( [\mathbb{B}f(x)]_{i} - [\mathbb{B}g(x)]_{i} \right)^2 dx 
+		\leq  \left( \frac{l_J}{l_c} \right)^2 \Vert f - g \Vert^2_{L^2}
+	\end{equation*}
+\end{proof}
+
+{\color{red} The following assumption guarantees that for every admissible strategy profile $\balpha \in \mathcal{A}$, the best response function evaluated at $\balpha \in \mathcal{A}$, $\underline{\alpha}_{BR}(\balpha)$, is squared integrable thus belongs to $\mathcal{A}$. }
+\begin{assumption}
+	There exists a $M > 0$ such that for all $x \in [0,1]$, $ \sup_{\alpha \in A(x) } \Vert \alpha \Vert \leq M$.
+\label{assumption:Graphon_games_2}
+\end{assumption}
+
+
+In order to proof the existence of a Nash equlibrium, we would like to use the Schauder's fixed point theorem: let $F: B \mapsto B$ and $L$ be a closed and convex subset of $B$, if $F(L) \subset L$, $F$ continuous, and $F(L)$ belongs to a compact subset of $B$. then there exists a fixed point $b \in L$ such that $b = F(b)$.
+
+
+\begin{lemma}
+ Suppose that the graphon game $\mathcal{G}(A,J,W)$ satisfies assumptions \ref{assumption:Garphon_games_1} and \ref{assumption:Graphon_games_2}, then it admits at least one Nash equilibrium.
+\end{lemma}
+
+\begin{proof}
+	Let us define the set $L_A = \{ f \in L^2([0,1], \mathbb{R}^k), \Vert f \Vert \leq M \}$.
+	
+	\begin{itemize}
+		\item We know that the operator $\mathbb{B}\mathbb{A}^W$ maps $L^2([0,1], \mathbb{R}^k)$ to $L^2([0,1], \mathbb{R}^k)$. And since $\mathbb{B} : L^2([0,1], \mathbb{R}^k) \to L^2([0,1], \mathbb{R}^k)$ and $\mathbb{A}^W : L^2([0,1], \mathbb{R}^k) \to L^2([0,1],\mathbb{R}^k)$ are continuous operators, so as $\mathbb{B} \mathbb{A}^W$. 
+		\item $L_A$ is non-empty, convex, and compact (bounded and closed) set of $L^2([0,1], \mathbb{R}^k)$.
+		\item $\mathbb{A}^W$ is a compact operator. Thus $\mathbb{A}^W L_A$ is pre-compact in $L^2([0,1], \mathbb{R}^k)$. Thus, $\mathbb{B} \overline{\mathbb{A}^W L_A}$ is compact. So $\mathbb{B}\mathbb{A}^W L_A$ belongs to a compact subset of $L^2([0,1], \mathbb{R}^d)$.
+		\item Since for every $f \in L^2([0,1], \mathbb{R}^k)$ and every $x \in [0,1]$, $\mathbb{B}f(x) = \arginf_{\alpha \in A(x)} J(\alpha, f(x)) \in A(x)$, so that $\mathbb{B}f \in L_A$ under assumption \ref{assumption:Graphon_games_2}. Thus $\mathbb{B}\mathbb{A}^W L_A \subseteq L_A$.
+	\end{itemize}
+	
+	Therefore, we can apply Schauder's fixed point theorem on $L_A$ with respect to the function $\mathbb{B}\mathbb{A}^W$.
+\end{proof}
+
+
+
+\subsubsection{uniqueness result}
+
+We can relax assumption \ref{assumption:Graphon_games_2} by 
+\begin{assumption}
+	There exists $\hat{z} \in \mathbb{R}^k$ and $M >0$ such that for every $x \in [0,1]$ and for every $\hat{\alpha} \in \argmin_{\alpha' \in A(x)} J(\alpha', \hat{z})$,
+	$$
+		\Vert \hat{\alpha} \Vert \leq M.
+	$$	
+\label{assumption:Graphon_games_3}
+\end{assumption}
+
+\begin{lemma}
+	Under assumption \ref{assumption:Garphon_games_1} and \ref{assumption:Graphon_games_3}, we have for every $f \in L^2([0,1], \mathbb{R}^k)$, $\mathbb{B}f \in L^2([0,1], \mathbb{R}^k)$.
+\end{lemma}
+
+\begin{proof}
+	It is easy to see that for a constant function $g(x) = \hat{z}$ for every $x\in [0,1]$,
+	$$
+		\Vert \mathbb{B} g \Vert_{L^2}^2 = \int_{[0,1]} \Vert \argmin_{\alpha' \in A(x)} J(\alpha', \hat{z}) \Vert^2 dx \leq M^2
+	$$
+	Thus, for every $f \in L^2([0,1], \mathbb{R}^k)$, we have
+	$$
+		\Vert \mathbb{B}f \Vert_{L^2} \leq \Vert \mathbb{B}f - \mathbb{B} g \Vert_{L^2} + \Vert \mathbb{B}g \Vert_{L^2} \leq \frac{l_J}{l_c} \Vert f - g \Vert_{L^2} + M < \infty. 
+	$$
+\end{proof}
+\begin{assumption}
+	Suppose that
+	$$
+		\frac{l_J}{l_c} \lambda_{max}(W) \leq 1,
+	$$
+	where $\lambda_{max}$ is the largest eigenvalue of $W$.
+\label{assumption:Graphon_games_4}
+\end{assumption}
+
+\begin{lemma}(Uniqueness)
+	Suppose that the graphon game $\mathcal{G}(A,J, W)$ satisfies Assumption \ref{assumption:Garphon_games_1}, \ref{assumption:Graphon_games_3}, and  \ref{assumption:Graphon_games_4}, then it admits a unique Nash equilibrium.
+\label{lemma:Graphon_game_unique_NE}
+\end{lemma}
+
+\begin{proof}
+	We can show that the game operator $\mathbb{B} \mathbb{A}^W$ is a contraction, then the result follows from Banach fixed point theorem. 
+\end{proof}
+ 

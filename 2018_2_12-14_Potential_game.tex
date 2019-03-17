@@ -1,0 +1,467 @@
+\section{Potential Games }
+
+For the sake of simplicity, we denote by $A = A^1 \times \ldots A^N$ the set of strategy profiles, and for any $i \in \{1,\ldots,N\}$, the couple $(\alpha, \balpha^{-i}) \in A$ with $\alpha \in A^i$ and $\balpha^{-i} \in A^{1} \times \ldots A^{i-1} \times A^{i+1} \times \ldots \times A^N$ stands for a strategy profile $(\alpha^1, \ldots, \alpha^{i-1}, \alpha, \alpha^{i+1}, \ldots, \alpha^N)$. Also, a function $\varphi : A \ni \balpha \mapsto \varphi(\balpha) \in \mathbb{R}$ evaluated at a strategy profile $\balpha = (\alpha^i, \balpha^{-i})$ is denoted by $\varphi(\alpha^i, \balpha^{-i})$.
+
+\begin{definition}[Monderer and Shapley 1996]
+	A Game $(A^{1} \times \ldots \times A^{N}, \{J^{i}\}_{i=1\ldots N})$ is said to be a \textbf{Potential Game} if there exists a map $\varphi: A \ni \balpha \mapsto \varphi(\balpha) \in \mathbb{R}$, called potential function, such that for every player $i \in \{1, \ldots,N \}$, and for any given $\balpha^{-i} \in  A^{1} \times \ldots A^{i-1} \times A^{i+1} \times \ldots \times A^N$, we have
+	\begin{equation}
+		 J^i(\beta, \balpha^{-i}) - J^i(\alpha, \balpha^{-i}) = \varphi( \beta, \balpha^{-i} ) - \varphi(\alpha, \balpha^{-i}) , \qquad \forall \, \alpha, \beta \in A^i
+	\end{equation}
+	In words, the change in a single player's cost function due to her own strategy deviation results in exactly the same amount of  change of the potential function $\varphi$.
+\end{definition}
+
+Assume that $(A^i)_{i=1,\ldots,N}$ are intervals in $\mathbb{R}$ and each cost function $J^i$ is continuous and differentiable. If $(A, \{J^i\}_{i=1,\ldots,N})$ is a potential game, then for every $i \in \{ 1,\ldots,N \}$ we have
+$$
+		\frac{\partial}{\partial \alpha^i} J^i(\alpha, \balpha^{-i}) = \frac{\partial }{\partial \alpha^i} \varphi(\alpha, \balpha^{-i}),  \quad \forall\, \alpha \in A^i, \balpha^{-i} \in A^{-i}.
+$$
+
+
+\begin{theorem}
+	Let $\Gamma = (A^1 \times \ldots \times A^N, {J^i}_{i=1,\ldots N})$ be a game in which the strategy sets $(A^i)_{i=1,\ldots N}$ are intervals of real numbers. Suppose the cost functions are twice continuously differentiable. Then $\Gamma$ is a potential game iff
+	\begin{equation}
+		\frac{\partial^2 J^i}{\partial \alpha^i \partial \alpha^j} =\frac{\partial^2 J^j}{\partial \alpha^i \partial \alpha^j}, \quad \text{for every } i,j \in \{1,\ldots,N\}.
+	\label{eq:Monderer_Shapley_th_4.5}
+	\end{equation} 
+	Moreover, if the cost functionals satisfy \eqref{eq:Monderer_Shapley_th_4.5} and $\balpha^0$ is an arbitrary strategy profile in $A$, then a potential for $\Gamma$ is given by
+	\begin{equation}
+		\varphi(\balpha) = \sum_{i=1}^N \int_0^1 \frac{\partial J^i}{\partial \alpha^i} (\beta(t)) \cdot (\beta^i)'(t) dt
+	\end{equation}
+	where $\beta: [0,1] \to A$ is a piecewise continuously differentiable path in $A$ that connects $\balpha^0$ to $\balpha$ (i.e. $\beta(0)=\balpha^0$ and $\beta(1) = \balpha$).\\
+\end{theorem}
+
+
+For any $i \in \{1,\ldots, N\}$ and any $\balpha^{-i} \in  A^{1} \times \ldots A^{i-1} \times A^{i+1} \times \ldots \times A^N$, if a game $( A^{1} \times \ldots \times A^N, \{J^i\}_{i=1,\ldots,N})$ is a potential game, then the best response function $br^i$ for player $i$ satisfies that for every $\alpha \in A^i$ and $\alpha^{*,i} \in br^{i}(\balpha^{-i})$:
+\begin{equation}
+	\varphi(\alpha, \balpha^{-i}) - \varphi(\alpha^{*,i}, \balpha^{-i}) = J^{i}(\alpha, \balpha^{-i}) - J^i(\alpha^{*,i}, \balpha^{-i}) \geq 0.
+\end{equation}
+Thus, 
+$$
+	br^{i}(\balpha^{-i}) = \arginf_{\alpha} \varphi(\alpha, \balpha^{-i}).
+$$
+So if $\balpha^* \in A$ is a minimum of the mapping $\varphi$, namely for any $\balpha \in A$,
+$$
+	\varphi(\balpha^*) \leq \varphi(\balpha),
+$$
+then we must have for every $i \in \{1,\ldots,N\}$ and every $\alpha \in A^i$,
+$$
+	\varphi(\alpha^{*,i}, \balpha^{*,-i}) \leq \varphi(\alpha, \balpha^{*,-i}),
+$$
+so that $\alpha^{*,i} \in br^{i}(\balpha^{*,-i})$ for every $i \in \{1,\ldots,N\}$. Thus, $\balpha^*$ is a Nash equilibrium. {\color{blue} Does the inverse hold even if we don't have a unique minimum $br^i(\balpha^{-i})$ for every $\balpha^{-i}$?}
+
+Moreover, if the Nash equilibrium is unique, then
+\begin{equation}
+\balpha^{*} \in A \text{ is a Nash equilibrium } \quad \Longleftrightarrow  \quad \balpha^* = \arginf_{\balpha} \varphi(\balpha)
+\end{equation}
+where the uniqueness of minimum is deduced from the uniqueness of Nash equilibrium.
+
+\begin{remark}
+	\ 
+	\begin{itemize}
+		\item If $A^i$ is finite for every $i \in \{1,\ldots,N\}$, so as the number of admissible strategies $\balpha \in A$. Then there is at least one Nash equilibrium when the game is potential.
+		\item If $A$ is compacts, and if the potential function $\varphi$ is continuous, then there exists a Nash equilibrium. Moreover, if $\varphi$ is strictly convex, then the Nash equilibrium is unique.
+	\end{itemize}
+\end{remark}
+
+
+\begin{definition}
+	A sequence $(\balpha_n)_{n \geq 0}$ of strategy profiles is called \textbf{path} if for every $n\geq 0$ , $\balpha_{n+1}$ is obtained from $\balpha_{n}$ by allowing one player, say $i_n \in \{1,\ldots,N\}$ to change her strategy.
+	
+	For example, if $\alpha_n^{i_n}$ changes into $\beta \in A^{i_n}$, then the strategy profile $\balpha_n$ changes to a new strategy profile $\balpha_{n+1}$:
+	$$
+		\balpha_n = (\alpha_n^1, \ldots, \alpha_n^N) \longrightarrow \balpha_{n+1} := (\alpha_n^1, \ldots, \alpha_n^{i_n -1}, \beta, \alpha_{n}^{i_n +1}, \ldots, \alpha_n^{N}).
+	$$
+	
+	A path is called an \textbf{improvement path} if 
+	$$
+		J^{i_n}(\balpha_{n+1}) < J^{i_n}(\balpha_{n}).
+	$$
+\end{definition}
+
+\begin{proposition}
+	The end-point of any finite improvement path is a Nash equilibrium.
+\end{proposition}
+\begin{proof}
+	By contradiction.
+\end{proof}
+
+
+\begin{proposition}
+	The potential function is determined up to a constant.
+	
+	If $\varphi_1$ and $\varphi_2$ are potential functions for the same potential game $(A^1 \times\ldots \times A^N, \{J^i\}_{i=1,\ldots,N})$, then there exists a constant $c \in \mathbb{R}$ such that
+	$$
+		\varphi_1 = \varphi_2 + c.
+	$$
+\end{proposition}
+\begin{proof}
+	Pick an arbitrary $\balpha^0 = (\alpha^{0,1}, \ldots, \alpha^{0,N}) \in A$, then define a function $H: A \ni \balpha= (\alpha^1, \ldots, \alpha^N) \mapsto H(\balpha) \in \mathbb{R}$ 
+	by
+	\begin{equation}
+		H(\balpha) = \sum_{i=1}^N J^{i}(\balpha_{i}) - J^{i}(\balpha_{i+1})
+	\end{equation}
+	where
+	$\balpha_{1} = \balpha$, and $\balpha_{i+1} = (\alpha^{0,1}, \ldots, \alpha^{0,i}, \alpha^{i+1}, \ldots, \alpha^N)$ for $i=1,\ldots N-1$, and $\balpha_{N+1} = \balpha^0$.
+	If $\varphi_1$ and $\varphi_2$ are potential functions, we can have
+	$$
+		H(\balpha) = \varphi_1(\balpha) - \varphi_1(\balpha^0), \quad \text{ and } \quad  H(\balpha)= \varphi_2(\balpha) - \varphi_2(\balpha^0).
+	$$
+	Let $c = \varphi_1(\balpha^0) - \varphi_2(\balpha^0)$, the conclusion then holds.
+\end{proof}
+
+
+
+\subsection{Example: Cournot Competition}
+
+Let us consider $N$ firms enumerated by numbers $\{1,\ldots,N\}$. They all produce a same kind of product to sell on the market. The quantity produced by firm $i$ is denoted by a positive real number $q^i \in [0,\infty)$. The productions profile of these firms is then denoted by $\bq = (q^1, \ldots,q^N) \in [0,\infty)^{N}$.  The cost for producing $q$ units of products ($q$ can be real numbers) is identical among firms and is depicted by a function $c: [0,\infty) \ni q \mapsto c(q) \in \mathbb{R}$. We define the total production $Q$ of these $N$ firms as
+$$
+	Q = \sum_{i=1}^N q^i.
+$$
+The price $p$ of the product on the market depends on the amount of total production through a function $f: [0,\infty) \to \mathbb{R}$, namely $p(\bq)=f(Q)$. We choose 
+$$
+	f(Q) = a - bQ,
+$$
+for some constants $a,b > 0$.
+For each firm $i \in \{1,\ldots,N\}$, we associate her with a cost function $J^i$ representing the negative of net revenue generated from her production and her selling activities. More precisely, the cost function $J^i: [0, \infty)^N \to \mathbb{R}$ is given by
+$$
+	J^i(\bq) = - \left[ p(\bq) \cdot q^i - c(q^i) \right] = c(q^i) - a q^i + b q^i \sum_{j=1}^N q^j.
+$$
+Each firm wants to minimize her associate cost function $J^i$ among the production profiles $\bq \in [0,\infty)^N$.
+
+
+To show that the game between $N$ firms under the Cournot competition framework is a potential game, we compute the partial derivative $\partial^2 J^i/ \partial q^i \partial q^j$ for every $i,j \in \{1,\ldots, N\}$.
+It can be shown that
+\begin{equation*}
+	\frac{\partial^2 J^i(\bq)}{\partial q^i \partial q^j} = b = 	\frac{\partial^2 J^j(\bq)}{\partial q^i \partial q^j} , \qquad \forall \, i,j \in \{1,\ldots N\}, \  \forall \, \bq \in [0,\infty)^N.
+\end{equation*}
+Thus, the game derive from Cournot competition is a potential game.
+
+Moreover, one way to construct a potential function is by considering the mapping
+$$
+	\varphi(\bq) = \sum_{i=1}^N \int_0^1 	\frac{\partial^2 J^i}{\partial q^i}(\beta^i(t), \bbeta^{-i}(t)) \cdot (\beta^i(t))' dt 
+$$
+where $\bbeta: [0,1] \ni t \mapsto \bbeta(t) = t\bq \in [0,\infty)^N$.
+
+A straight computation gives
+$$
+	(\beta(t)^i)' = q^i, \qquad \frac{J^i(\bbeta(t))}{\partial q^i} = \frac{\partial c(t q^i)}{\partial q^i}  - a + 2b t q^i + bt \sum_{j\neq i}^N q^j
+$$
+so that
+$$
+	\varphi(\bq) = \sum_{i=1}^N \left(c(q^i) - a q^i + b \cdot (q^i)^2 + \frac{b}{2} q^i \sum_{j\neq i}^N q^j \right)
+$$
+
+\subsection{Congestion Game}
+
+There are several components in a discrete Congestion Game:
+\begin{itemize}
+	\item $N$ players enumerated by $\{1,\ldots, N\}$.
+	\item A set of resources denoted by $E$.
+	\item A feasible strategy sets $A^i$ of every player $i \in \{1,\ldots, N\}$ such that $A^{i} \subseteq 2^E$, a collection of sets of elements in $E$.  Namely, for player $i$, her strategy $\alpha^i \in A^i$ is a set of resources $\alpha^i \subseteq E$. Let  $A = A^1 \times \ldots A^N$ denotes the collection of all feasible strategy profiles for $N$ players.
+	\item We associate to each resource $e \in E$ a load function $k_e: A \to \{0,\ldots, N\}$ defined as $k_e(\balpha) = | \{i : e \in \alpha^i\} |$ for every strategy profile $\balpha \in A$.
+	\item We associate to each resource $e \in E$ a cost function $c_e : \{0,\ldots, N\} \to \mathbb{R}$.
+	\item For each strategy profile $\balpha \in A$, player $i$ experiences a cost $J^i(\balpha)$ defined by
+	\begin{equation}
+		J^i(\balpha) = \sum_{e \in \alpha^i} c_e(k_e(\balpha)).
+	\end{equation}
+\end{itemize}
+We can denote a congestion game of $N$ players by $(E, A^1 \times \ldots  \times A^N, \{c_e\}_{e\in E}, \{k_e\}_{e\in E}, \{J^i\}_{i=1,\ldots,N})$.\\
+
+\textbf{Example} A Network Congestion Game is define with a graph $G=(V,E)$ such that for each player $i \in \{1,\ldots, N\}$, there is a pair of vertices $(S_i, T_i)\in V \times V$ such that the feasible strategy set for player $i$ is defined by
+$$
+	A^i = \{ \alpha \subset E :  \alpha \text{ is a path from } S_i \text{ to } T_i \}.
+$$
+
+
+\begin{proposition}(Rosental 73)
+	Every congestion game has a pure Nash equilibrium
+\end{proposition}
+\noindent \textbf{Idea}: consider the Rosental potential function 
+\begin{equation}
+	\varphi(\balpha) = \sum_{e \in E} \sum_{k=1}^{k_e(\balpha)} c_e(k)
+\label{eq:Rosental_potential_function}
+\end{equation}
+
+\begin{proof}
+	We consider a potential function \eqref{eq:Rosental_potential_function}.  For every $\balpha \in A$ and $i \in \{1, \ldots, N\}$, consider $\tilde{\alpha} \in A^i$,
+	\begin{eqnarray}
+		\varphi(\tilde{\alpha}, \balpha^{-i}) &=& \sum_{e \in E} \sum_{k=1}^{k_e(\tilde{\alpha}, \balpha^{-i})} c_e(k) \nonumber \\
+		&=& \sum_{e \in E} \left( \sum_{k=1}^{k_e(\balpha)} c_e(k)  + \mathbbm{1}_{\{e \in \tilde{\alpha} \backslash \alpha^i \} } c_e(k_e(\tilde{\alpha}, \balpha^{-i})) - \mathbbm{1}_{ \{ e \in \alpha^i \backslash \tilde{\alpha}^i\}}  c_e(k_e( \balpha)) \right) \nonumber \\
+		&=& \sum_{e \in E} \sum_{k=1}^{k_e(\balpha)} c_e(k) + \sum_{e \in \tilde{\alpha} \backslash \alpha^i } c_e( k_e( \tilde{\alpha}, \balpha^{-i})) - \sum_{e \in \alpha^i \backslash \tilde{\alpha}^i } c_e(k_e(\balpha)) \nonumber \\
+		&=& \sum_{e \in E} \sum_{k=1}^{k_e(\balpha)} c_e(k) + \sum_{e \in \tilde{\alpha}} c_e( k_e( \tilde{\alpha}, \balpha^{-i})) - \sum_{e \in \alpha^i} c_e(k_e(\balpha)) \nonumber \\
+		&=& \varphi(\balpha) + J^i(\tilde{\alpha}, \balpha^{-i}) - J^i(\balpha)
+	\end{eqnarray}
+Hence the conclusion.
+\end{proof}
+
+\subsection{Example: Braess Paradox}
+
+Consider a congestion game on a Network Graph $G=(V=\{s,t,a,b\}, E=\{e_{sa}, e_{at}, e_{sb}, e_{bt} \})$. Assume that there are $N=100$ cars, each of them has an identical feasible strategy set $A_0 = \{ \{e_{sa},e_{at} \}, \{e_{sb}, e_{bt}\} \}$. For edges $e \in E$, we define the cost functions:
+\begin{equation*}
+	c_{e_{sa}} (k) = c_{e_{bt}} (k) = k, \quad c_{e_{at}}(k) = c_{e_{sb}}(k) = c, \qquad  \forall\, k \in \{0,\ldots, 100\}
+\end{equation*}
+In words, the cost incurred for routing on edges $\{e_{sa}, e_{bt} \}$ is proportionate to the number of cars on this edge, whilst the cost incurred for routing on edges $\{e_{sb}, e_{at} \}$ is constant. For every player $i \in \{1,\ldots, N\}$, her cost function is given by
+\begin{equation}
+	J^i(\balpha) = \sum_{e \in \alpha^i} c_e (k_e(\balpha)) 
+	= \left\{
+		\begin{array}{ll}
+			c_{e_{sa}}( k_{e_{sa}}(\balpha)) + c_{e_{at}}( k_{e_{at}}(\balpha) ) &\qquad if \, \alpha^i = \{ e_{sa}, e_{at} \} \\
+			c_{e_{sb}}( k_{e_{sb}}(\balpha)) + c_{e_{bt}}( k_{e_{bt}}(\balpha) )   &\qquad if \, \alpha^i = \{ e_{sb}, e_{bt} \}
+		\end{array}
+	\right.
+\end{equation}
+Thus, 
+\begin{eqnarray}
+	J^i(\balpha) &=& c + \text{ the number of cars going through the same route as car } i  \nonumber \\
+	&=& c + \sum_{j=1}^N \mathbbm{1}_{\alpha^{j} = \alpha^{i} }
+\end{eqnarray}
+
+\begin{lemma}
+	$\balpha^* \in A$ is a Nash equilibrium if and only if 50\% of cars routes on path $\{e_{sa}, e_{at}\}$ and the other 50\% on path $\{e_{sb}, e_{bt}\}$. More precisely
+	$$
+		\balpha^* \in A \text{ is a Nash equilibrium }\quad  iff \quad  \left\vert \left\{ i : \alpha^{*,i} = \{e_{sa}, e_{at}\}  \right\}\right\vert = \frac{N}{2}
+	$$ 
+\end{lemma}
+
+\begin{proof}
+	Let $\balpha^* \in A $ such that $\left\vert \left\{ i : \alpha^{*,i} = \{e_{sa}, e_{at}\}  \right\}\right\vert = \frac{N}{2}$. Then for any car $i \in \{1,\ldots,N\}$, assume w.l.o.g. that it routes on path $\alpha^{*,i} = \{e_{sa}, e_{at}\}$. The cost it that experiences is
+	$$
+	J^i( \balpha^{*}) = c + \sum_{j = 1}^N \mathbbm{1}_{ \alpha^{*,j} = \alpha^{*,i}} = c + \frac{N}{2} .
+	$$
+	If it changes to path $\tilde{\alpha} = \{s_{sb}, e_{bt}\}$, then the new cost associate to it becomes
+	$$
+		J^i( \tilde{\alpha}, \balpha^{*,-i}) = c + \left( \sum_{j\neq i} \mathbbm{1}_{ \alpha^{*,j} = \tilde{\alpha}} +1 \right) = c + \frac{N}{2} + 1.
+ 	$$
+ 	This show that $\balpha^*$ is a Nash equilibrium.
+ 	
+ 	Inversely, for any Nash equilibrium $\balpha^* \in A$, we must have for every $i \in \{1,\ldots, N\}$ and every $\tilde{\alpha} \in A_0$,
+ 	$$
+ 		J^i(\balpha^*) \leq J^i(\tilde{\alpha}, \balpha^{*, -i}),
+ 	$$
+ 	namely
+ 	$$
+ 		\sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \alpha^{*,i}  }\leq \sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \tilde{\alpha} }
+ 	$$
+ 	Since there are only two strategies in $A_0$, we denote by $\tilde{\alpha}_{-}$ the alternative strategy in the set $A_0$ compared to $\tilde{\alpha}$. We must have for every $i \in \{1,\ldots,N\}$
+ 	\begin{equation}
+ 		2 \sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \alpha^{*,i} } \leq 	\sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \tilde{\alpha}}  + \sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \tilde{\alpha}_{-}} = N.
+ 	\label{eq:lemma_Barass_paradox_proof}
+  	\end{equation}
+	Thus, there must exists another car $k \in \{1,\ldots, N\}$ such that $\alpha^{*,k} \neq \alpha^{*,i}$, so that we also have
+	$$
+		\sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} \neq \alpha^{*,i} }  = \sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \alpha^{*, k} } \leq \frac{N}{2}.
+	$$
+	On the other hand
+	$$
+	\sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} = \alpha^{*,i} }  + 	\sum_{j=1}^N \mathbbm{1}_{\alpha^{*,j} \neq \alpha^{*,i} } = N
+	$$
+	so that the inequality \eqref{eq:lemma_Barass_paradox_proof} holds for an arbitrary $i \in \{1,\ldots,N\}$, namely
+	$$
+		\left\vert \left\{ j : \alpha^{*,j} = \alpha^{*,i} \right\} \right\vert = \frac{N}{2}.
+	$$
+	Again, because there is only two strategy in $A_0$, we have
+	$$ \left\vert \left\{ i : \alpha^{*,i} = \{e_{sa}, e_{at}\}  \right\}\right\vert = \frac{N}{2}.
+	$$	 	
+\end{proof}
+
+
+Now we add a new route (edge) between vertex $a$ and $b$, denoted by $e_{ab}$, and we assign not cost for cars routing on this new route, i.e. $c_{e_{ab}}(k) = 0$ for every $k \in \mathbb{N}$. We only allows car to route from $a$ to $b$, so the new feasible strategy set, still denoted by $A_0$, becomes
+$$
+	A_0 =  \{ \{e_{sa}, e_{at} \}, \{ e_{sb}, e_{bt} \}, \{ e_{sa}, e_{ab}, e_{bt} \} \}.
+$$
+We assume an additional condition on the constant cost $c$ on edge $e_{at}$ and $e_{sb}$:
+\begin{equation}
+	c > N =100
+\end{equation}
+
+\begin{lemma}
+	$ \alpha^* \in A $ is a Nash equilibrium if and only if all cars route on $\{e_{sa}, e_{ab}, e_{bt} \} $.
+\end{lemma}
+
+
+\subsection{Strategic Game}
+
+\begin{definition}
+	A game  $(A^1 \times \ldots A^N, \{J^i\}_{i=1,\ldots,N})$ is said to be a \textbf{strategic game} if it belongs to one of the two following situations:
+	\begin{itemize}
+		\item it is a coordination game :
+		\begin{equation}
+			J^i(\balpha) = J^j(\balpha) ,\qquad \forall i,j \in \{1,\ldots, N\}, \forall \balpha \in A.
+		\end{equation}
+		\item it is a dummy game:
+		\begin{equation}
+			J^{i}(\balpha) = J^i(\tilde{\alpha}, \balpha^{-i}), \qquad \forall i\in \{1,\ldots,N\}, \forall \balpha \in A,\text{ and } \forall \tilde{\alpha} \in A^i
+		\end{equation}
+	\end{itemize} 
+\end{definition}
+
+
+\begin{proposition}
+	A game $(A^1 \times \ldots \times A^N, \{J^i\}_{i=1,\ldots,N})$ is a potential game if and only if there exists functions $\{\varphi_i^c\}_{i=1,\ldots,N}$ and $\{\varphi_i^d\}_{i=1,\ldots,N}$ such that
+	for every $i \in \{1,\ldots, N\}$:
+	$$
+		J^i = \varphi_i^c + \varphi_i^d
+	$$
+	and
+	\begin{itemize}
+		\item the game $(A^1 \times \ldots \times A^N, \{\varphi_i^c\}_{i=1,\ldots,N})$ is a coordination game;
+		\item the game $(A^1 \times \ldots \times A^N, \{\varphi_i^d\}_{i=1,\ldots,N})$ is a dummy game.
+	\end{itemize}
+\label{prop:decomposition_potential_game}
+\end{proposition}
+
+\begin{proof}
+	
+	$(\Rightarrow)$: We can chose a potential function $\varphi = \varphi_i^c$ as one of the cost functions in the coordination game.\\	
+	$(\Leftarrow)$: Let $\varphi$ be a potential function, and we define $\forall i \in \{1,\ldots, N\}, \,  \forall \balpha \in A$ the functions
+	$$
+		\left\{
+			\begin{array}{l}
+				\varphi_i^c(\balpha) = \varphi(\balpha) \\
+				\varphi_i^{d}(\balpha) = J^i(\balpha) - \varphi(\balpha).
+			\end{array}
+		\right.
+	$$
+	Then it is easy to check that $(A, \{\varphi_i^c\}_{i=1,\ldots,N})$ and $(A, \{\varphi_i^d\}_{i=1,\ldots, N})$ are a coordination game and a dummy game respectively.
+\end{proof}
+
+
+
+
+\begin{definition}
+	Two games $(A^1 \times \ldots \times A^N, \{J^i_1 \}_{i=1,\ldots,N})$ and $(\tilde{A}^1 \times \ldots \times \tilde{A}^N, \{\tilde{J}^i_2\}_{i=1,\ldots,N})$ are said to be isomorphic if there exists $N$ bijection mappings $\{\phi_i\}_{i=1\ldots,N}$:
+	$$	
+		\phi_i : A^i \ni \alpha^i \mapsto \phi_i(\alpha^i) \in \tilde{A}^i
+	$$
+	satisfying that for every $i \in \{1,\ldots, N\}$ and for every $\balpha = (\alpha^1,\ldots, \alpha^n) \in A$,
+	$$
+		J^i(\alpha^1, \ldots, \alpha^N) = \tilde{J}^i(\phi_1(\alpha^i), \ldots, \phi_N(\alpha^N) ).
+	$$
+\end{definition}
+
+
+\begin{proposition}
+	\ 
+	\begin{enumerate}
+		\item Every coordination game is isomorphic to a congestion game.
+		\item Every dummy game is isomorphic to a congestion game.
+		\item Every potential game is isomorphic to a congestion game.
+	\end{enumerate}
+\end{proposition}
+
+
+\begin{proof}
+	\ 
+	\begin{enumerate}
+		\item Let $(A^1 \times \ldots \times J^N, \{J^{i}\}_{i=1\ldots, N})$ be a coordination game. We can denote the common cost function for players $i \in \{1,\ldots,N\}$ by 
+		$$
+			J(\balpha) = J^i (\balpha).
+		$$
+		Now we construct a congestion game $(E, \tilde{A}^1 \times \ldots \tilde{A}^N, \{c_e\}_{e\in E}, \{k_e\}_{e\in E}, \{\tilde{J}^i\}_{i=1,\ldots,N})$ by the following steps:
+		\begin{itemize}
+			\item each strategy profile $\balpha \in A$ is associated to a different resource $e(\balpha)$. The collection of resources is denoted by $E=\{ e(\balpha):  \balpha \in A \}$. In another words, the resource set $E$ can be indexed by the set of strategy profiles;
+			\item for each resource $e = e(\balpha) \in E$, we define its cost function $c_e: \{0,\ldots, N\} \to \mathbb{R}$ by
+			$$
+				c_e(k) = c_{e(\balpha)}(k) = \mathbbm{1}_{\{k = N\} } \cdot J(\balpha), \qquad \forall \, k \in \{0,\ldots,N\};
+			$$
+			\item for each player $i$, her feasible strategy set $\tilde{A}^i$ is defined by
+			$$
+				\tilde{A}^i = \{ \phi_i(\alpha^i) : \alpha^i \in A^i \}
+			$$ 
+			where the mapping $\phi_i: A^i \to 2^E$ takes the form
+			$$
+				\phi_i(\alpha^i) = \bigcup_{ \balpha^{-i} \in A^{-i}} \left\{ e(\alpha^i, \balpha^{-i}) \right\}, \qquad \forall \, \alpha^i \in A^i.
+			$$
+			The collection of strategy profiles for $N$ players is denoted by $\tilde{A} = \tilde{A}^1 \times \ldots \tilde{A}^N$.
+			\item for each player $i$, her cost function $\tilde{J}^i: \tilde{A} \to \mathbb{R}$ is defined by
+			$$
+				\tilde{J}^i(\tilde{\balpha}) = \sum_{e \in \tilde{\alpha}^i } c_e( k_e(\tilde{\balpha})),
+			$$
+			where $k_e(\tilde{\balpha}) = \vert \{ i : e \in \tilde{\alpha}^i \} \vert \in \{0,\ldots,N\}$ is the load function associated to resource $e \in E$ evaluated at strategy profile $\tilde{\balpha} \in \tilde{A}$.
+		\end{itemize}
+		
+		We can see that the mapping $\{\phi_i\}_{i=1,\ldots,N}$ are bijective from $A^i$ to $\tilde{A}^i$ for every player $i$. Moreover, for a given $i \in \{1,\ldots,N\}$, for every resource $e= e(\bbeta) \in E$ with some $\bbeta \in A$, and for every strategy $\tilde{\alpha}^i = \phi_i(\alpha^i)) \in \tilde{A}^i$ with some $\alpha^i \in A^i$, we have
+		$$
+			e(\bbeta) = e \in \tilde{\alpha}^i \Longleftrightarrow \beta^i = \alpha^i.
+		$$
+		Thus, if a resource $e = e(\bbeta)  \in E$ is fully loaded with a strategy profiles $\tilde{\balpha} =(\phi_1(\alpha^1), \ldots, \phi_N(\alpha^N) \in \tilde{A}$ with some $\balpha=(\alpha^1, \ldots, \alpha^N) \in A$, we must have 
+		\begin{eqnarray*}
+			k_{e}(\tilde{\balpha}) = N & \Longleftrightarrow&  e = e(\bbeta) \in \tilde{\alpha}^i, \qquad \forall \, i=1,\ldots,N \\
+			&\Longleftrightarrow& \beta^i = \alpha^i, \qquad \forall \, i = 1,\ldots,N \\
+			&\Longleftrightarrow& \bbeta = \balpha
+		\end{eqnarray*}
+		Hence, we can have for every $\balpha \in A$, the cost function for player $i$ evaluated at the strategy profile $\tilde{\balpha} = (\phi_1(\alpha^1), \ldots, \phi_N(\alpha^N) )\in \tilde{A}$ satisfies
+		\begin{equation*}
+			\tilde{J}^i(\tilde{\balpha}) = \sum_{e \in \tilde{\alpha}^i } c_e( k_e(\tilde{\balpha})) 
+			= \sum_{e(\bbeta) \in \phi_i(\alpha^i) } c_e( k_e(\tilde{\balpha}))
+		 = \sum_{ \{ e(\bbeta) \in E : \beta^i = \alpha^i  \} }  \mathbbm{1}_{k_{e(\bbeta)}(\tilde{\balpha}) = N } \cdot J(\bbeta)
+		\end{equation*}
+		so that
+		\begin{equation*}
+		 	\tilde{J}^i(\phi_1(\alpha^1), \ldots, \phi_N(\alpha^N) )
+		 	=  \sum_{  \{ e(\bbeta) \in E : \beta^i = \alpha^i  \}  } \mathbbm{1}_{\bbeta = \balpha} \cdot J(\bbeta)
+		 	= J(\balpha) 
+		 	=  J^i(\balpha).
+		\end{equation*}
+		This shows that the congestion game constructed above is isomorphic to the coordination game 
+		$(A^1 \times \ldots \times A^N, \{J^i\}_{i=1,\ldots,N})$.
+		
+		\item (todo)
+		\item The result follows directly by applying Proposition \ref{prop:decomposition_potential_game} and the previous two cases.
+	\end{enumerate}
+\end{proof}
+
+
+\subsection{Example: Network Design Game}
+This example is a special case of of Network Congestion Game (Shapley).
+
+Let us consider a graph (or network) $G=(V,E)$. There are $N$ players enumerated by $\{1,\ldots,N\}$. We view each edge $e \in E$ as a resource, and we define a mapping $c: E \ni e \mapsto c(e) \in \mathbb{R}$ representing the cost for using edge $e \in E$.
+
+For each player $i \in \{1,\ldots,N\}$, we associate it with two vertices $(s_i, t_i) \in V\times V$ such that the set of feasible strategy for player $i$ are collection of paths  on graph $G$ from vertex $s_i$ to $t_i$:
+$$
+	A^i = \{ \text{ path from } s_i \text{ to } t_i \text{ on graph } G \}.
+$$
+{\color{blue} (when we talk about paths, we should clarify if we are on a directed graph or we are talking about simple paths on undirected graph)}
+
+For every $e \in E$, we define a load function  $k_e : A \ni \balpha \mapsto k_e(\balpha) \in \{0,\ldots,N\}$ such that
+$$
+	k_e(\balpha) = \left\{ i: e\in \alpha^i \right\}
+$$
+For every player $i \in \{1,\ldots,N\}$, we associate her a cost function $J^i: A \ni \balpha \mapsto J^i(\balpha) \in \mathbb{R}$ given by
+$$
+	J^i(\balpha) = \sum_{e \in \alpha^i} \frac{ c(e)}{k_e(\balpha)}.
+$$
+The network with these cost functions $\{J^i\}_{i=1\ldots,N}$ is called a \textbf{cost sharing network}. 
+
+For each edge $e\in E$, if we associate it with a cost function $c_e: \{0,\ldots,N\} \mapsto \mathbb{R}$ defined as
+$$c_e(k) = \frac{c(e) }{k}, \qquad \forall k = 1,\ldots, N, \qquad \text{ and } c_e(0) = 0,$$
+then we can see that the game is indeed a congestion game. We call it a \textbf{network congestion game}.
+
+
+
+We define the social cost for $N$ players employing a strategy profile $\balpha \in A$  as the sum of individual costs of each player incurred by taking collectively the strategy profile $\balpha$, namely
+$$
+	J(\balpha) = \sum_{i=1}^N J^i(\balpha).
+$$
+Consider a set value function $e: A \ni \balpha \to e(\balpha) \in E$ such that
+$$
+e(\balpha) = \bigcup_{i=1,\ldots,N} \alpha^i.
+$$
+Thus, we can have
+$$
+	J(\balpha) = \sum_{i=1}^N J^i(\balpha) = \sum_{i=1} \sum_{e \in \alpha^i} \frac{c(e)}{k_e(\balpha)} = \sum_{ e \in e(\balpha)} k_e(\balpha) \frac{c(e)}{k_e(\balpha)} = \sum_{e \in e(\balpha)} c(e)
+$$
+
+
+\begin{proposition}
+	The game $(A^1 \times \ldots \times A^N, \{J^i\}_{i=1,\ldots,N})$ defined above is a potential game.
+\end{proposition}
+\begin{proof}
+	consider a potential function 
+	\begin{equation}
+		\varphi(\balpha) = \sum_{e \in E} \sum_{k=1}^{k_e(\balpha)} \frac{c(e)}{k} = \sum_{e \in E} c(e) \cdot h(k_e(\balpha))
+	\end{equation}
+	where 
+	$$
+		k_e(\balpha) = \sum_{i=1}^{k_e(\balpha)} \frac{1}{i}.
+	$$
+\end{proof}

@@ -1,0 +1,48 @@
+\subsection{Example: LQ graphon game}
+
+Consider a graphon game $\mathcal{G}(A,J,W)$ such that $A(x) =[0,\infty)$ for every $x \in [0,1]$ and the cost function
+$$
+	J(\alpha,z) = \frac{1}{2} \alpha^2 - \alpha ( a z + b)
+$$
+with $a\in \mathbb{R}$ and $b >0$. 
+
+We can easily check that the function $J$ satisfies assumption \ref{assumption:Garphon_games_1} with a constant $l_c = 1$ and $l_J = a$. We can also see that assumption \ref{assumption:Graphon_games_3} is satisfied with $\hat{z} = 0$ and $M = b$. Moreover, because
+$$
+	\frac{\partial J(\alpha, z)}{\partial \alpha} = \alpha - (az + b).
+$$
+So that Assumption \ref{assumption:Graphon_games_4} holds if
+$$
+	\vert a \vert \lambda_{\max}(W) \leq 1.
+$$
+By Lemma \ref{lemma:Graphon_game_unique_NE}, the graphon game admits a unique Nash equilibrium.
+
+The best response for player $x \in [0,1]$ is given by
+$$
+	\underline{\alpha}_{BR}(\balpha)(x) = \max\{0, a z(x|\balpha) + b \}
+$$
+where $z(x | \balpha) = \int_{[0,1]} \balpha(y) W(x,y) dy$.
+
+We distinguish two cases
+\begin{itemize}
+	\item If $a >0$, the game is a game of strategic complements. Indeed, for every $x\in [0,1]$, $a>0, b>0, z(x|\balpha) \geq 0$ so that $\partial_\alpha J(0, z(x|\balpha)) < 0$. Hence
+	$$
+		J(\alpha, z(x | \balpha)) = J(0, z(x | \balpha)) + \partial_\alpha J(0, z(x | \balpha)) \alpha + o(\alpha) \leq J(0, z(x | \balpha)).
+	$$
+	As a consequence $\underline{\alpha}_{BR}(\balpha) > 0$. The Nash equilibrium $\balpha^* \in L^2([0,1], \mathbb{R})$ is given by
+	$$
+		\balpha^* = b ( I + \vert a \vert A^w) 1_{[0,1]}.
+	$$
+	which is completely determined by the information of the underlying graph.
+	\item if $a < 0$, the game is a game of strategic substitutes. We may still have
+	$$
+		\balpha^* = b ( I + \vert a \vert A^w) 1_{[0,1]},
+	$$
+	but this is not always true. {\color{red} Explanation? }
+\end{itemize}
+
+\begin{remark}
+	The measure used in graphon operator $A^W$ is the Lebesgue measure, which has no atoms. It ensures that the weight put on a singleton $\{x\}$ is zero, i.e. $A^W \delta_{x} = 0$. We will relax this condition later in the course.
+\end{remark}
+
+
+

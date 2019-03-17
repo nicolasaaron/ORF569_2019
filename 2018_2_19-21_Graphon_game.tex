@@ -1,0 +1,202 @@
+\section{Graphon games}
+
+\subsection{Erdos-Renyi Graph}
+We present 2 types of simple random graph:
+\begin{itemize}
+	\item	Given two integers $N$ and $M$, consider a set of graphs
+	$$
+		\Omega = \{ \text{set of graphs with } N \text{ vertices } \{1,\ldots,N\} \text{ and } M \text{ edges}  \}.
+	$$ 
+	such that each of these graphs is sampled with the same probability equals to 
+	$$
+		p = \frac{1}{\vert \Omega \vert} = \binom{\binom{N}{2}}{M}^{-1}
+	$$
+	This kind of random graph is denoted by $G(N,M)$.
+	
+	\item (introduced by Gillbert firstly) Consider a graph with $N$ vertices. An edge is in the graph with probability $p \in [0,1]$. This kind of random graph is denoted by $G(N,p)$. Its set of edges is denoted by $E(G(N,p))$.
+	
+	Thus, the number of edges is random in $G(N,p)$, with expectation 
+	$$\mathbb{E}[ E(G(N,p))] = p \left( \begin{array}{c} N \\ 2 \end{array} \right).$$
+	A sample of random graph $G(N,p)$ has $M$ edges with probability
+	$$
+		\mathbb{P}( |E(G(N,p)))| = M ) = p^M (1-p)^{N (N-1)/ 2 - M}.
+	$$
+\end{itemize}
+
+\subsection{Stochastic Block model}
+
+
+\begin{definition}(adapted from Eabbe, ref)
+	For positive integers $N,n$, a probability vector $p$ of dimension $n$, and a symmetric matrix $W$ of dimension $n \times n$ with entries in $[0,1]$, \textbf{ the model $SBM(N,p,W)$} defines an $N-$vertex random graph with vertices split in $n$ communities, where each vertex is assigned a community label in $\{1,\ldots,n\}$ independently under the \textbf{community prior} $p$, and pair of vertices with labels $k$ and $l$ connect independently with probability $W_{k,l}$.	
+\end{definition}
+
+\begin{definition}
+Let $N$ be a positive integer (the number of vertices), $n$ be a positive integer (the number of communities), $p = (p_1,\ldots, p_n)$ be a probability vector on $[n] :=\{1,\ldots, n\}$ (the prior on the $n$ communities, $\sum p_k = 1$.) and $W$ be a $n \times n$ symmetric matrix with entries in $[0,1]$ (the connectivity probabilities).  The pair $(X,G)$ is drawn under $SBM(N,p,W)$ if $X$ is a random variable in $[n]^N$ with i.i.d. components $(X_i)_{i \in \{1,\ldots,N\}}$ distributed under $p$, and $G = (\{1,\ldots,N\}, E(G))$ is an $N-$vertex simple graph where vertices $i$ and $j$ are connected with probability $W_{X_i, X_j}$, independently of other pairs of vertices. Namely
+$$
+	\mathbb{P}(X_i = k) = p_k,\qquad \forall i \in \{1,\ldots, N\} \text{ and } k \in [n],
+$$
+and
+$$
+	\mathbb{P}( e_{ij} \in E(G) | X) = W_{X_i,X_j}, \qquad \forall i,j \in \{1,\ldots,N\}.
+$$
+The community sets $\mathcal{C} = \{ \mathcal{C}_1, \ldots, \mathcal{C}_n \}$ is defined by $\mathcal{C}_k = \mathcal{C}_k(X) := \{i \in \{1,\ldots,N\} : X_i = k \}$, $k \in [n]$.
+\end{definition}
+
+
+We define a vector $ y \in \{0,1\}^{\binom{N}{2}}$ such that $y_{ij} = \mathbbm{1}_{e_{ij} \in E(G)}$ for any $i,j \in \{1,\ldots,N\}$. Thus, the distribution of $(X,G)$ is defined as follow:
+for each $x \in [n]^N$ and $ y \in \{0,1\}^{\binom{N}{2}}$:
+\begin{equation}
+ \mathbb{P}(X = x) = \prod_{i=1}^N p_{x_i} = \prod_{k=1}^n p_k^{| \mathcal{C}_k(x) |}
+\end{equation}
+\begin{eqnarray}
+\mathbb{P}(E(G)= y | X=x) &=& \prod_{1\leq i\leq j \leq N} W_{x_i,x_j}^{y_{ij}} (1- W_{x_i, x_j})^{1- y_{ij}} \\
+&=& \prod_{1\leq i\leq j \leq N} W_{k,l}^{N_{k,l}(x,y)} (1- W_{k,l})^{N^c_{k,l}(x,y)}
+\end{eqnarray}
+where
+\begin{eqnarray}
+	N_{k,l}(x,y) &=& \sum_{i<j, x_i = k, x_j = l} {1}_{\{y_{ij} =1 \} }\\
+	N_{k,l}^c(x,y) &=& \sum_{i<j, x_i =k, x_j = l} {1}_{\{y_{ij} = 0 \}} = \vert C_k(x) \vert \cdot \vert C_l(x) \vert - N_{k,l}(x,y) , \quad k \neq l \\
+	N_{k,k}^c(x,y) &=& \sum_{i<j, x_i = k, x_j = l} {1}_{\{ y_{ij} = 0 \}} = \binom{\vert C_k(x) \vert }{2} - N_{k,k}(x,y)
+\end{eqnarray}
+
+
+
+\begin{remark}
+	\ 
+	\begin{itemize}
+		\item if $W_{k,l} = q$ and $N=n$, then we recover the Erdos-Reyi graph $G(N,q)$
+		\item for some $w,q \in [0,1]$ such that
+		$$
+			W_{k,l} = \left\{ \begin{array}{ll} w &\quad k = l \\ q & \quad k \neq l \end{array} \right.
+		$$
+		Then we have \textbf{planted partition model}. Moreover, if $w > q$, we say that the graph has a \text{assortative} structure, and if $w <q$, it has a \textbf{disassortative} structure.
+	\end{itemize}
+\end{remark}
+
+
+\subsection{Graphon}
+
+We begin with some notations. Let $L^2([0,1])$ be the space of square integrable real-value functions defined on $[0,1]$ and $L^2([0,1], \mathbb{R}^k)$ the space of square integrable vector valued functions defined on $[0,1]$. The norm $\Vert \cdot \Vert_{L^2}$ are defined as usual, and the norm for operator $A: L^2 \to L^2$ is defined as
+$$
+	\Vert A \Vert = \sup_{f: \Vert f \Vert_{L^2} \leq 1} \Vert A f \Vert_{L^2} 
+$$
+For any linear operator $A$, we denoted by $\lambda_{max}(A)$ and $\rho(A)$ the largest eigenvalue and the spectral radius of $A$. The symbol $\mathbbm{1}_N$  denotes the ector of all ones elements in $\mathbb{R}^N$ and $1_{[0,1]}(\cdot)$ is the function constantly equaled to one on $[0,1]$. $\mathbbm{I}$ is the identify operator and $I$ the identity matrix. 
+
+\begin{definition} 
+	A mapping $W: [0,1] \times [0,1] \to [0,1]$ is a \textbf{kernel} if it is measurable (w.r.t. to the Lebesgue measure on $[0,1]$) and symmetric, namely
+	$$
+		W(x,y) = W(y,x).
+	$$
+\end{definition}
+
+
+\begin{definition}(Graphon games, Francesca Paris et Asuman Ozdaglar)
+	A \textbf{graphon} is a bounded symmetric measurable function $W: [0,1] \times [0,1] \to [0,1]$ encoding interactions among an infinite (continuum) number of players. By abuse of terminology, the function $W$ is also called the kernel of graphon $W$. The collection of graphons is denoted by $\mathcal{W}$.
+\end{definition}
+
+\begin{remark}
+ In the context of graphon, the continuous variable $x \in [0,1]$ generalizes the notion of player, and $W(x,y)$ represents the strength of the interaction between player $x$ and player $y$.
+\end{remark}
+
+\begin{definition}
+	For a given graphon $W \in \mathcal{W}$, we define the associate graphon operator $A^W: L^2 \to L^2$ by
+	$$
+		(A^W f) (x) = \int_{[0,1]} W(x,y) f(y) dy
+	$$
+\end{definition}
+
+
+We assume that the graphon kernel is bounded:
+$$
+\int W(x,y) dy \leq 1.
+$$
+
+\begin{proposition}
+	 The graphon operator $A^w$ is a Hilbert-Schmidt operator. In other words, $A^w$ is a bounded operator on the Hilbert space $L^2([0,1])$ with finite Hilbert-Schmidt norm
+			$$
+				\Vert A^W \Vert^2_{HS} = \sum_{s_i \in \sigma(A^w)} s_i^2 < \infty.
+			$$
+		where $\sigma(A^w)$ is the spectrum of the operator $A^w$.
+\end{proposition}
+
+\begin{remark}
+	Recalled that a Hilbert space is a vector space equipped with a complete inner product. A Banach space is a complete normed vector space. We also recall some notions and properties related to Hilbert-Schmidt operator below (ref. functional analysis, Walter Rudin):
+	\begin{itemize}
+		\item 
+		The vector space $H = L^2([0,1], \mathbb{R}^k)$ equipped with the inner product $\langle f,g \rangle = \int_{[0,1]} f(x)^\top g(x)dx$ is a Hilbert space. 
+		\item A linear operator $A: H_1 \to H_2$ from a Banach space $H_1$ to another Banach space $H_2$ is said to be \textbf{bounded} if there exists an $M > 0$ such that for all $f \in H_1$,
+		$$
+			\Vert Af \Vert_{H_2} \leq M \Vert f \Vert_{H_1}.
+		$$
+		The collection of all bounded linear operators of $H_1$ into $H_2$ is denoted by $\mathcal{B}(H_1, H_2)$. For simplicity $\mathbb{B}(H,H)$ will be denoted by $\mathcal{B}(H)$.
+		
+		\item Since every Banach space is a norm space, so that a linear operator $A: H_1 \to H_2$ is bounded if and only if it is \textbf{continuous}. 				
+		Here, the continuity of operator $A$ is defined with respect to the topological vector spaces $(H_1, \tau_1)$ and $(H_2, \tau_2)$ in which the topologies $\tau_1$ and $\tau_2$ are induced by their \textbf{natural metric} $d_1(f,g) = \Vert f-g \Vert_{H_1}$ and $d_2(f',g')= \Vert f'-g'\Vert_{H_2}$ respectively.
+		
+		
+		As a complement, since $H_1$ and $H_2$ are \textbf{norm spaces} equipped with nature topologies $\tau_1$ and $\tau_2$, the above definition for bounded linear operator is equivalent to the following definition (c.f. Rudin 1.31) of bounded linear operator between topological vector spaces $(H_1, \tau_1)$ and $(H_2, \tau_2)$:
+		
+		A linear operator $A: (H_1, \tau_1) \to (H_2, \tau_2)$ is said to be bounded if it maps every $\tau_1-$bounded set in $H_1$ into a $\tau_2-$bounded set in $H_2$.
+		
+		(a subset $B$ of a topological vector space $(\Omega,\tau)$ is said to be $\tau-$bounded if to every neighborhood $V$ of $0$ in $\Omega$ corresponds a number $s>0$ such that $B \subset t V$ for every $t>s$.)
+		
+		\item (cf Rudin 4.1) Suppose $H_1$ and $H_2$ are norm spaces. Associate to each bounded linear operator $A \in \mathcal{B}(H_1, H_2)$ the number 
+		$$
+			\Vert A \Vert = \sup\{ \Vert A f \Vert: f \in H_1, \Vert f \Vert \leq 1 \}.
+		$$
+		This definition of $\Vert A \Vert$ makes $\mathcal{B}(H_1, H_2)$ into a norm space. If $H_2$ is a Banach space, so is $\mathcal{B}(H_1, H_2)$.
+		
+		
+		\item (cf Rudin 4.16) Suppose $H_1$ and $H_2$ are Banach spaces and $U$ is the open unit ball in $H_1$, i.e. $U= \{x: \Vert x \Vert_{H_1} < 1 \}$. A linear map $A: H_1 \to H_2$ is said to be \textbf{compact} if the closure of $A(U)$ is compact in $H_2$. 
+		
+		\item Suppose $H$ is a Banach space, the $\mathcal{B}(H)$ is a Banach space, and moreover, it is an algebra: if $S, T \in \mathcal{B}(H)$, one defines $ST \in \cB(H)$ by 
+		$$
+			(ST)(f) = S(T(f)), \quad f \in H.
+		$$
+		An operator $ T \in \cB(H)$ is said to be \textbf{invertible} if there exists $S \in \cB(H)$ such that
+		$$
+			ST = I = TS.
+		$$	
+		In this case, we write $S = T^{-1}$. By the opening mapping theorem (cf Rudin 2.11), this happens if and only if $ker(T) = \{f \in H: Tf = 0\} = \{0\}$ and $rg(T) = \{g\in H : \exists \, f \in H, \quad Tf = g\} = H$. 
+		
+		The \textbf{spectrum} $\sigma(A)$ of an operator $A \in \cB{H}$ is the set of all scalars $\lambda$ such that $A-\lambda I$ is not invertible. Thus, $\lambda \in \sigma(T)$ if and only if at least one of the following two statements is true:
+		\begin{enumerate}
+			\item The range of $T-\lambda I$ is not all of $H$ (not subjective).
+			\item $T-\lambda I$ is not one-to-one (not injective).
+		\end{enumerate}		
+		
+		If $T-\lambda I$ is not one-to-one, then $\lambda$ is said to be an \textbf{eigenvalue} of $A$; the corresponding eigenspace is $ker(T-\lambda I)$.
+		
+		
+		
+		
+		\item Hilbert-Schmidt operator is a compact operator.
+	
+	\end{itemize}
+\end{remark}
+
+
+\subsection{relationship between graph and graphon}
+
+\begin{definition}
+	We say that a function $W: [0,1]^2 \to [0,1]$ is a step function if there is a partition $Q = \{Q_1, \ldots, Q_n \}$ of $[0,1]$ into measurable sets such that $W$ is constant on every product set $Q_k \times Q_l$. The sets $Q_k$ are the steps of $W$. We define a \textbf{step function graphon} $W^[n] \in \tilde{\mathcal{W}}$ corresponding to a $n\times n$ matrix $P^{[n]}$ by setting
+	\begin{equation}
+	W^{[n]}(x,y) = P_{k,l}^{[n]}, \qquad \forall (x,y) \in Q_k \times Q_l.
+	\end{equation}
+	Note that $W^{[n]}$ depends on the ordering of the nodes in $P^{[n]}$. Apart from that, the relation between graphs and step functions graphons is bijective.
+\end{definition}
+
+\begin{definition}(Sampling procedure)
+	We pick uniformly $N$ points $\{u_i\}_{i=1,\ldots,N}$ from $[0,1]$ and define the weight adjacency matrix $P_w^{[N]}$ as follows
+	\begin{equation}
+	[P_w^{[N]}]_{ij} = \mathbbm{1}_{i \neq j} \cdot W(u_i, u_j).
+	\end{equation}
+	Additionally, starting from $P_w^{[N]}$, we define the $0-1$ adjacency matrix $P_s^{[N]}$ as the adjacency matrix corresponding to a graph with $N$ nodes obtained by randomly connecting nodes $i$ to $j$ with Bernoulli probability $[P_{w}^{[N]}]_{ij}$.
+\end{definition}
+
+So, according to the sampling procedure, for any $p \in [0,1]$, the constant graphon $W(x,y) = p$ coincides with the Erdos-Renyi random graph model with edge probability $p$. 
+
+Moreover, if we consider a prior probability vector $p \in [0,1]^n$ with $\sum_{k} p_k = 1$, any step function graphon $W^{[n]}$ gives raise to a stochastic block model $SBM(N, p, W^{[n]})$. A sample $(X,G)$ with $x_i \in Q$ and $G=([N],E(G))$ can be characterized by the weight adjacency matrix $P_{w}^{[N]}$ computed from $W^{[n]}$.
+
+
+

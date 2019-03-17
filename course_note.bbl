@@ -1,0 +1,40 @@
+\begin{thebibliography}{}
+
+\bibitem[Bonacich, 1972a]{Bonacich1972b}
+Bonacich, P. (1972a).
+\newblock Factoring and weighting approaches to status scores and clique
+  identification.
+\newblock {\em Journal of mathematical sociology}, 2(1):113--120.
+
+\bibitem[Bonacich, 1972b]{Bonacich1972}
+Bonacich, P. (1972b).
+\newblock Technique for analyzing overlapping memberships.
+\newblock {\em Sociological methodology}, 4:176--185.
+
+\bibitem[Bonacich, 1987]{bonacich1987power}
+Bonacich, P. (1987).
+\newblock Power and centrality: A family of measures.
+\newblock {\em American journal of sociology}, 92(5):1170--1182.
+
+\bibitem[Janson, 2010]{janson2010graphons}
+Janson, S. (2010).
+\newblock Graphons, cut norm and distance, couplings and rearrangements.
+\newblock Technical report, Department of Mathematics, Uppsala University.
+
+\bibitem[Katz, 1953]{katz1953new}
+Katz, L. (1953).
+\newblock A new status index derived from sociometric analysis.
+\newblock {\em Psychometrika}, 18(1):39--43.
+
+\bibitem[Krivine, 1979]{krivine1979constantes}
+Krivine, J.-L. (1979).
+\newblock Constantes de grothendieck et fonctions de type positif sur les
+  spheres.
+\newblock {\em Advances in Mathematics}, 31(1):16--30.
+
+\bibitem[Page et~al., 1999]{page1999pagerank}
+Page, L., Brin, S., Motwani, R., and Winograd, T. (1999).
+\newblock The pagerank citation ranking: Bringing order to the web.
+\newblock Technical report, Stanford InfoLab.
+
+\end{thebibliography}

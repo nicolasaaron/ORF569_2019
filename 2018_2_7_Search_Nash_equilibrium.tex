@@ -1,0 +1,87 @@
+\section{Search for Nash equilibrium}
+
+\subsection{overview}
+\begin{enumerate}
+	\item Fixed Point theorem
+			\begin{itemize}
+				\item Kakutani (1941) theorem. Used by John Nash.
+				
+					  If the best response function $br$ is not set value function
+				\item Banach fixed point theorem
+				
+						If the best response function is a strict contraction, then there is a unique fixed point.
+				\item Brouder, Brower, Schauder fixed point theorem (used to show existence of a fixed point)
+				\item special structure of the Game
+						\begin{itemize}
+							\item Tarski (unimodular game)
+							\item potential game
+						\end{itemize}
+			\end{itemize}
+	\item Variational Inequalities
+			\begin{itemize}
+				\item Graphon Games
+			\end{itemize}
+\end{enumerate}
+
+\subsection{An example for Nash equilibrium}
+
+Assume that $A^i = \mathbb{R}$ the real line. For each player $i \in \{1,\ldots,N\}$, We consider a cost function
+$$
+	J^{i}(\alpha^i, \alpha^{-i}) = f_i(\alpha^i - \alpha^{i,0} + \delta \cdot \sum_{j \neq i} a_{ij}^{(G)} \alpha^j ) + g_i(\alpha^{-i})
+$$
+where $\alpha^{i,0}$ is an (autistic) action preferred by player $i$. 
+
+Assume that $f_i$ is symmetric and descending on $(-\infty, 0]$, and increasing on $[0, \infty)$.
+	\begin{itemize}
+		\item $f_i(x) = f_i(-x)$ for any $x \in \mathbb{R}$
+		\item $f_i(0) = \min_x f_i(x)$
+	\end{itemize}
+For any $i \in \{1,\ldots,N \}$, if $\alpha^{-i}$ is given, the best response obtained for player $i$ is
+\begin{equation}
+	br^{i}(\alpha^{-i}) = \alpha^{i,0} - \delta\cdot \sum_{j \neq i} a_{ij}^{(G)} \cdot \alpha^j
+\label{eq:best_response_player_i}
+\end{equation}
+A fixed point for the best response function will satisfy
+$$
+	\alpha^{i} = \alpha^{i,0} - \delta \cdot \sum_{j \neq i} a_{ij}^{(G)} \cdot \alpha^j
+$$
+Assume that $a_{ii}^{(G)} = 0$, we can have
+$$
+	\balpha = (\bI + \delta A^{G})^{-1} \cdot \balpha^0
+$$
+If the game is symmetric: $\alpha^{i,0} = \alpha^{0} \in \mathbb{R}$ for all $i \in \{1,\ldots, N\}$, then 
+\begin{eqnarray}
+	\balpha &=& \alpha^{0} \cdot (\bI + \delta A^{(G)})^{-1} \mathbbm{1} \nonumber \\
+	&=&  \alpha^0 \left( \bI - [\bI _+ \delta A^{(G)}]^{-1} [\bI + \delta A^{(G)}] + [\bI + \delta A^{(G)}]^{-1} \right) \mathbbm{1} \nonumber \\
+	&=& \alpha^0 (\bI - \delta [\bI + \delta A^{(G)}]^{-1} A^{(G)} ) \mathbbm{1} \nonumber \\
+	&=& \alpha^0 ( \mathbbm{1} - \mathbbm{b}_{\delta, -\delta})
+\end{eqnarray}
+where $\mathbbm{b}_{a,b}$ is the Bonacich centrality measure.
+
+\begin{remark}
+In this example, we can see that the Nash equilibrium only depends on the graph structure (through the Bonacich centrality measure), bu not the functions $f_i$ nor $g_i$.
+\end{remark}
+
+\begin{remark}
+We can have a more general setting for the action space $A^i$, for example:
+\begin{itemize}
+	\item if $A^{i} = [0, \infty)$, the Nash equilibrium becomes
+		$$
+			\alpha^{*,i} = \max \left\{0, \alpha^{i,0} - \delta \sum_{j \neq i} a_{ij}^{(G)} \alpha^{*,j} \right\};
+		$$
+	\item if $A^{i} = [0, L]$ for some $L>0$, the Nash equilibrium becomes
+	$$
+	\alpha^{*,i} = \min \left\{ L, \max \left\{0, \alpha^{i,0} - \delta \sum_{j \neq i} a_{ij}^{(G)} \alpha^{*,j} \right\} \right\}.
+	$$
+\end{itemize}
+\end{remark}
+
+
+\begin{remark}
+In equation \eqref{eq:best_response_player_i},
+\begin{itemize}
+	\item if $\delta <0$, $br^i$ is increasing in actions of neighbors. We call the game $(A^{1} \times \ldots \times A^{N}, \{J^{i} \}_{i=1,\ldots,N})$ is a game with \textbf{strategic complements}, as the actions chosen by among players mutually reinforce one another.
+	\item if $\delta >0$, $br^{i}$ is decreasing in actions of neighbors. We call the game  $(A^{1} \times \ldots \times A^{N}, \{J^{i} \}_{i=1,\ldots,N})$ is a game with \textbf{strategic substitutes}, as the actions chosen among players mutually offset one another.
+\end{itemize}
+\end{remark}
+

@@ -1,0 +1,261 @@
+\section{Model for Games with a continuum of players}
+
+\begin{definition}\ 
+	\begin{itemize}
+		\item Player: $(I, \mathcal{J}, \nu)$ is a probability space where $I$ represents the set of players, $\mathcal{J}$ is a $\sigma$-algebra of coalitions, and $\nu$ is a probability distribution that models the weights put on coalitions;
+		\item $E$ is a Banach space (for example $\mathcal{C}_0([0,1])$, $\mathbb{R}^k$, etc);
+		\item there exists a function $A: I \to 2^E$ such that for $\nu-$almost every $i \in I$, $A(i)$ is the set of feasible actions for player $i$.
+		\item $(\Omega, \mathcal{F}, \mathbb{P})$ is a probability space where $\Omega$ is the set of state of nature, $\mathcal{F}$ represents the events, and $\mathbb{P}$ is a probability distribution.
+	\end{itemize}
+\end{definition}
+
+We define the set of admissible controls by 
+$$
+	L_A = \{\alpha\in L^1( (I, \mathcal{J},\nu), E) | \, \alpha(i) \in A(i) \quad \nu-a.e. \, i\in I \}.
+$$
+
+We define the ``Bochner integral" on the Banach space $E$ of an admissible control $\underline{\alpha} \in L_A$ by
+$$
+	\mathbb{E}[\alpha] = \int_{\Omega} \alpha(i) d\nu(i)  \in E.
+$$
+
+\begin{definition}
+We define a preference function $\Pi : I \times \Omega \times L_A \ni (i, \omega, \alpha) \mapsto \Pi(i,\omega, \alpha) \in 2^E$ such that
+$$
+	\Pi(i,\omega, \alpha) \subset A(i),\quad \text{for } \nu-a.e.\, i\in I \text{ and for } \mathbb{P}-a.e. \, \omega \in \Omega.
+$$	
+The set $\Pi(i,\omega, \alpha)$ represents the set of all actions that are feasible for player $i$ and preferred to the actions $\alpha(i) \in A(i)$, given that the state of the world is $\omega \in \Omega$ and the other players $j \neq i$ who play with actions $(\alpha(j))_{j\neq i}$.
+\end{definition}
+
+We assume that players observe the state of nature $\omega \in \Omega$, and they decide to take actions according to a decision rule:
+$$
+\underline{\alpha} : \Omega \ni \omega \mapsto \underline{\alpha}(\omega) \in L_A.
+$$
+
+
+\begin{definition}
+	A decision rule $\underline{\alpha}^*$ is a (random) Cournot-Nash equilibrium (CNE for short) if for $\mathbb{P}$-a.e. $\omega \in \Omega$ and $\nu-$a.e. $i \in I$
+	$$
+		\Pi(i, \omega, \underline{\alpha}^*(\omega)) = \emptyset.	
+	$$
+\end{definition}
+
+Example: If we have associate to player $i$ a cost function $J^i : \Omega \times A(i) \times L_A (\omega, \alpha_i, \alpha) \mapsto J^i(\omega, \alpha_i, \alpha) \to \mathbb{R}$. Then $\underline{\alpha}^*$ is a CNE if for $\mathbb{P}$-a.e. $\omega \in \Omega$ and $\nu-$a.e. $i\in I$, we have for all $\alpha_i \in A(i)$,
+$$
+	J^i(\omega, \underline{\alpha}^*(\omega)(i), \underline{\alpha}^*(\omega) ) \leq J^i( \omega, \alpha_i, \underline{\alpha}^*(\omega)).
+$$
+And in this case, for any decision rule $\underline{\alpha}: \Omega \to L_A$, we have for $\nu$-a.e. $i\in I$ and $\mathbb{P}$-a.e. $\omega \in \Omega$,
+$$
+	\Pi(i, \omega, \underline{\alpha}) = \left\{ \alpha_i \in A(i) |  \, J^i(\omega, \alpha_i, \underline{\alpha}) < J^i( \omega, \underline{\alpha}(\omega)(i), \underline{\alpha}(\omega) ) \right\}.
+$$
+
+
+\begin{remark}
+	For a continuous measure $\nu$, if $\forall i \in I$, $\nu(\{i\}) =0$ , then $I$ cannot be countable.
+	
+	Definition of an atom: a set $A$ is said to an atom if $A \in \mathcal{J}$, $\nu(A) >0$, and for any $B \subseteq A$ and $B \in \mathcal{J}$, we have
+	$$
+		\nu(B) = 0 \quad or \quad \nu(B) = \nu(A).
+	$$	
+\end{remark}
+
+
+\begin{remark}
+	Case of finite games: $I=\{1,\ldots, N\}$. We have $\nu(A) = \frac{1}{N} | A |$ for any $A \subset I$, and 
+	$$
+		\int_I f(x) dx = \frac{1}{N} \sum_{i=1}^N f(i).
+	$$
+\end{remark}
+
+\begin{remark}
+For more references, see Aumann and Mas Colell. And also G. Carmona for non-atomic games and atomic games.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Coordination and Acquisition: Beauty contest}
+Example: ``Beauty contest" (Morris and Shin)\\
+
+Background description: 
+
+we assume that there is a continuum of players. The demands are
+\begin{itemize}
+	\item uncertainty (size of customer base);
+	\item supplier price;
+	\item average price of the other supplier.
+\end{itemize}
+The improvement of decision making relies on the survey that collections the market information (acquisition part). The information consists of different signals, and can be exogenous or indigenous.
+
+The Game is a one-shot game, in which players take actions simultaneously. 
+
+A player is represented by a real number $l \in [0,1]$. Player $l$ chooses $n$ sources of information acquisitions $z_l \in \mathbb{R}^n_+$. For each source $i\in \{1,\ldots,n\}$, $z_{li}$ represents the attention paid by player $i$ to the source $i$. 
+
+After the choice $z_l$, player $i$ observes signals $x_l =(x_{l1}, \ldots, x_{ln}) \in \mathbb{R}^n$ about an unobservable quantity $\theta$. The attention $z_{li}$ is the precision of signal $x_{li}$.
+
+Player $l$ then takes action $\alpha_l$.
+
+The cost function to player $l \in [0, 1]$ is defined by
+$$
+u_l = C(z_l) + (1-\gamma) (\alpha_l - \theta)^2 _ \gamma (\alpha_l - \overline{\alpha})^2
+$$
+where $C: \mathbb{R}_+ \to \mathbb{R}$ is differentiable and increasing, $\gamma \in [-1, 1]$ and $\overline{\alpha}$ represents the average action, namely
+$$
+	\overline{\alpha} = \int_0^1 \alpha_l dl \in \mathbb{R}.
+$$
+
+\begin{remark}\ 
+	\begin{itemize}
+		\item The term $(\alpha_l - \overline{\alpha})^2$ represents the coordination part between players. If $\gamma >0$, each player wants to choose a similar action as her peers . Otherwise, if $\gamma < 0$, each player intends to behave differently than others.
+		\item In order to make the average action $\overline{\alpha}$ well defined, we need to assume that the function $[0,1] \ni l \mapsto \alpha_l$ is measurable and integrable.
+	\end{itemize}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{signals}
+Assume that player don't know the value of $\theta$ (i.e. player starts with no knowledge of $\theta$). The signal observed by player $l$ to the source $i$ is modeled by 
+$$
+	x_{li} = \theta + \eta_i + \epsilon_{li}
+$$
+where $\eta_i \sim \mathcal{N}(0, \kappa_i^2)$ and $\epsilon_{li} \sim \mathcal{N}(0, \frac{\xi_{i}^2}{z_{li}})$, and $k_i, \xi_i$ are constant.
+
+The term $\eta_i$ stands for the noise displayed by the source $i$ when player $l$ approaches to it. The term $\epsilon_{li}$ represents the noise brought by the action $\alpha_l$.
+
+We also notice that the variance of $\epsilon_{li}$, say $\frac{\xi_{i}^2}{z_{li}}$, is inversely proportional to the precision $z_{li}$. In another words, the more attention player $l$ gives to signal $i$, the less the noise incurred by the action of player $l$.
+
+\begin{assumption}
+	Suppose that $\eta_i$ and $\epsilon_{li}$ for all $i \in \{1\ldots,N\}$ and $l \in [0,1]$ are all independent.
+\end{assumption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{correlation}
+Let us look at the covariance of observations of the same source from different players. Suppose $l \neq l'$, then
+\begin{eqnarray}
+	cov(x_{li}, x_{l'i}) &=& \mathbb{E}\left[ (x_{li} - \mathbb{E}[x_{li}]) (x_{l'i}- \mathbb{E}[x_{l'i}]) \right] \nonumber  \\
+	&=& \mathbb{E}[(\eta_i + \epsilon_{li}) (\eta_i + \epsilon_{l'i}) ] \nonumber \\
+	&=& \kappa_i^2 \nonumber \\
+	&=& \rho_{ll' i} \sigma_{li} \sigma_{l'i}
+\end{eqnarray} 
+where 
+$$
+	\sigma_{li}^2 = \kappa_i^2 + \frac{\xi^2_i}{z_{li}}, \qquad \sigma_{l'i}^2= \kappa_i^2 + \frac{\xi_{i}^2}{z_{l'i}}, \qquad \text{and } \quad \rho_{ll'i} = \frac{k_i^2}{\sigma_{li} \sigma_{l'i} }.
+$$
+
+\begin{remark}\ 
+	\begin{itemize}
+		\item If a player pays more attention to information, then the precisions of the corresponding observed signals increase ($z_{li}$ increases), which will also lead to an increase of the correlation $\rho_{ll'i}$ between this player and the others.
+		\item When $\xi_0$ or $\zeta_{li} \to \infty$, then $\rho_{ll' i}  \to 1$. In this case, we say that the signals are public, i.e. the observation $x_{li}$ does not depends on player $l$.
+		\item When $\kappa_i = 0$, then $\rho_{lli} =0$, we say in this situation that the signals are private.
+	\end{itemize}
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{look for symmetric equilibrium}
+
+\begin{definition}
+For player $l\in [0,1]$, a strategy is a couple $(z_l ,a_l)$ where $z_l \in \mathbb{R}^n_+$ and $a_l : \mathbb{R}^n \to \mathbb{R}$. A strategy $(z_l, a_l)$ is of feedback form if the action taken by player $l$ satisfies
+$$
+	\alpha_l = a_l(x_l). 
+$$
+where $x_l$ is the observation of the precision $z_l$.
+\end{definition}
+
+\begin{definition}
+	The game is said to be symmetric if all player $l \in [0,1]$ use a common strategy $(z, a)$.
+\end{definition}
+
+For any given $l \in [0,1]$, suppose that player $l$ choses a strategy $(z_l,a_l)$ and for all other players $l' \neq l$, they follow a strategy $(z_{l'}, a_{l'}) = (z,a)$, then the cost function for player $l$ with strategy $(z_l, a_l)$ is given by
+$$
+	J^l( (z_l, a_l), (z_{-l}, a_{-l}) ) = \mathbb{E}[u_l] = C(z_l) + (1-\gamma) \mathbb{E}[(\alpha_l - \theta)^2] + \gamma \mathbb{E}[ (\alpha_l - \overline{\alpha})^2]
+$$
+where
+$$
+	\overline{\alpha} = \int_{0}^1 a_{l'}(x_{l'}) dl'.
+$$
+
+\begin{remark}
+	The definition of $\overline{\alpha}$ seems to say that it should be a random variable because $x_l$ are random variables for all $l \in [0,1]$.
+\end{remark}
+
+\begin{remark}
+	Think about the case in $N$ players game, with observations $x_1, \ldots, x_N$ and $l\in \{1,\ldots,N\}$. We can still assume that $x_{li} = \theta + \eta_i + \epsilon_{li}$. Then 
+	$$
+		\overline{\alpha}^N = \frac{1}{N} \sum_{l=1}^N a_l(x_l).
+	$$
+	Suppose that $(z_l, a_l) = (z,a)$ for all $l\in \{1,\ldots,N\}$, then by law of large numbers, when $N \to \infty$, 
+	$$ \overline{\alpha}^N \longrightarrow \mathbb{E}[a(x)] \in \mathbb{R}$$
+	where $x=(x_1, \ldots, x_n)$ with $x_i \sim \mathcal{N}(0, \kappa_i^2 + \frac{\xi_i^2}{z})$.
+	
+	However, we expect that $\overline{\alpha}$ to be random variable instead of a real number. Here, we need to clarify the Law of large number for continuum of random variables.
+	
+	For each $l\in [0,1]$, Let $X_l = a(x_l)$ be a random variable on $(\Omega, \mathcal{F}, \mathbb{P})$ valued in $\mathbb{R}$. Then, for every $\omega \in \Omega$,
+	$$
+		\overline{\alpha} = \int_0^1 X_l(\omega) dl.
+	$$
+	Thus, assume that we can apply the Fubini's theorem on $\Omega \times [0,1] \ni (\omega, l) \mapsto X_l(\omega) = a(x_l(\omega)) \in \mathbb{R}$, then
+	\begin{align*}
+		\mathbb{E}[\overline{\alpha}] &= \int_\Omega \int_0^1 X_l(\omega) dl d\mathbb{P}(\omega) \\
+		&=\int_0^1 \int_{\Omega} X_l(\omega) dP(\omega) dl \\
+		&= \int_0^1 \mathbb{E}[X_l] dl \\
+		&= \mathbb{E}[X_l]
+	\end{align*}
+	
+	This means that the Law of large number for continuum random variables seems to be equivalent to the Fubini's theorem. 
+	
+	However, the function $ [0,1] \times \Omega \ni (l, \omega) \mapsto X_l(\omega) = a(x_l(\omega)) \in \mathbb{R}$ is not necessarily jointly measurable on the product space $[0,1] \times \Omega$ with respect to the product $\sigma-$algebra $ \mathcal{J} \times \mathcal{F}$.
+\end{remark}
+
+\begin{remark} 
+	\ 
+	\begin{itemize}
+	\item I want all the random variable $X_l$ for $l \in [0,1]$ to be independent.
+	\item I want $X_l$ to have the same distribution $\mu$.
+	\end{itemize}
+
+	Let us denote $\Omega = (\mathbb{R}^n)^{I}$ with $I=[0,1]$, the set of all function from $I$ to $\mathbb{R}^n$. Consider a probability measure $\mu$ on $(\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ where $\mathcal{B}(\mathbb{R}^n)$ is the Borel $\sigma-$algebra on $\mathbb{R}^n$. Consider $p$ real numbers $J_p = (l_1, \ldots, l_p) \in I^p$, and a projection function $\pi_{J_p}: \Omega \ni x = (x_l)_{l\in I} \to (x_{l_1}, \ldots, x_{l_p}) = x_{J_p} \in (\mathbb{R}^n)^p$, 
+	Let us denote by $\mu_{J_p}$ the distribution of $\pi_{J_p}(x)$ on $(\mathbb{R}^n)^p$. If $(x_j)_{j \in J_p}$ are independent following the distribution $\mu$, then $\mu_{J_p} = \mu \otimes \ldots \otimes \mu$. 
+	
+	For any finite subsets $J_{p_1}, J_{p_1}$ of $I$ such that $J_{p_1} \subset J_{p_2}$, the i.i.d assumption guarantees the consistency condition, namely 
+	$$
+		\mu_{J_{p_1}} = \mu_{J_{p_2}} \circ \pi_{J_{p_2} \to J_{p_1}}^{-1}
+	$$  
+	where $\pi_{J_{p_2} \to J_{p_1} }$ is the projection mapping from $J_{p_2}$ to $J_{p_1}$.
+	
+	The Kolmogorov extension theorem tells us that there must exists a unique probability measure on $\Omega$, denote by $\mathbb{P}_\mu$ such that
+	$$
+		\mathbb{P}_\mu( x_{J_p}  \in A) = \mu_{J_p}(A), \qquad \forall \, A \in (\mathcal{B}(\mathbb{R}^n) )^p.
+	$$
+	Hence, the probability space $(\Omega, (\mathcal{B}(\mathbb{R}^n) )^I, \mathbb{P}_\mu)$ is well defined.		
+	However, we do not have measurability for the function 
+	$$
+		[0,1] \times \Omega \ni (l, \omega) \mapsto X_l(\omega) = \omega(l) \in \mathbb{R}^n.
+	$$
+	This is usually called the White Noise.
+\end{remark}
+
+
+\subsubsection{Linear strategy in ``Beauty contest"}
+
+Assume that for all $l \in [0,1]$, the strategy $a_l : \mathbb{R}^n \to \mathbb{R}$ is linear in $x$ and coefficient sum up to $1$, i.e. $a_l(x) = \sum_{i=1}^n a_{li} x_i$ with $\sum_{i=1}^n a_{li} = 1$.
+Then
+\begin{equation}
+	\overline{\alpha} =  \int_{0}^1 a_{l'}(x_{l'}) dl' = \int_0^1 \left( \sum_{i=1}^n a_{l'i} x_{l'i} \right) dl'.
+\end{equation} 
+
+We look for symmetric equilibrium, name for strategy $a: \mathbb{R}^n \ni x \mapsto \sum_{i=1}^n a_i x_{li} \in \mathbb{R}$. Since $x_{li} = \theta + \eta_i + \epsilon_{li}$, we deduce that
+\begin{align*}
+	\overline{\alpha} &= \int_0^1 \left( \sum_{i=1}^n a_i (\theta + \eta_i + \epsilon_{l'i} ) \right) dl' \\
+	&= \theta + \sum_{i=1}^n a_i \eta_i + \int_0^1 \left(\sum_{i=1}^n a_i \epsilon_{l'i} \right) dl' \\
+	&= \theta + \sum_{i=1}^n a_i \eta_i
+\end{align*}
+where the last equality is justified by the fact that 
+$$
+	\int_{0}^1 \epsilon_{l'i} dl' = 0.
+$$
+
+Hence, for a fixed $l \in [0,1]$, player $l$ with strategy $(z_l,a_l)$, and for all $l' \neq l$ such that $(z_{l'}, a_{l'}) = (z, a)$, the cost function of player $l$ becomes 
+\begin{align*}
+	J^l( (z_l, a_l), (z_{-l}, a_{-l}) ) &= C(z_l) + (1-\gamma) \mathbb{E}[ (a_l(x_l) - \theta)^2 ] + \gamma \mathbb{E}[ (\alpha_l(x_l) - \overline{\alpha})^2 ] \\
+	&= C(z_l) + \sum_{i=1}^n a_{li}^2 \left[ (1-\gamma) \kappa_i^2 + \frac{\xi_i^2}{z_{li} } \right] + \gamma \sum_{i=1}^n (a_{li} - a_i)^2 \kappa_i^2
+\end{align*}

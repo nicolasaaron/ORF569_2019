@@ -1,0 +1,494 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Next topic: Auction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\section{Game with Incomplete Information}
+\emph{Incomplete information} is different from \emph{Imperfect information}. A Perfect information game assumes that each player knows everything perfectly (what they are doing, the cost function, etc.). In an \emph{Imperfect information} setting, they know everything but not perfectly, for instance, there is noise in what a player sees about the other players or about the cost function. However, in the \emph{Incomplete information} setting, a single player does not know what others are doing. Here, we look at problems with incomplete information, the examples that we are going to investigate are games in auction.
+
+
+\subsection{Bayesian Games}
+
+We distinguish between information that is known \emph{a priori} and information that is known \emph{a posteriori}. These are two elements which could be stochastic. 
+
+\begin{definition}
+	A N player Bayesian game, denoted by $\mathcal{G}(\Omega, \Theta, A, J)$, consists of the following elements:
+	\begin{itemize}
+		\item Let $\Omega$ be the set of the states of the world.
+		\item Each player $i \in \{1,\dots,N\}$ has a type $\theta_i \in \Theta_i$, where the set $\Theta_i$ is the feasible set of types corresponded to player $i$. We denote by $\Theta = \Theta_1 \times \dots \times \Theta_N$. 
+		\item There exists a prior probability on $\Omega \times \Theta$, denoted by $\rho \in \mathcal{P}(\Omega \times \Theta)$.
+		\item  For each player $i \in \{1,\ldots,N\}$, let $A_i$ be the set of her feasible actions. Let $A = A_1 \times \dots \times A_N$ denote the set of admissible strategy profiles.
+		\item For each player $i \in \{1,\ldots,N\}$, we associate her with a cost function  $J^i: \Omega \times \Theta \times A \to \mathbb{R}$. The collection of all cost functions $\{J^i\}_{i=1,\ldots,N}$ is denoted by $J$.
+	\end{itemize}
+	
+\end{definition}
+
+\begin{remark}
+	\begin{itemize} 
+		\item The state space $\Omega$ will not be presented in Auctions.
+		\item Notice that this probability is easy to define when there is a finite number of players but when the number of players is infinite, the construction is more involved. We will need to define $\sigma-$algebra on the state space $\Omega$ and the set of types $\Theta$.
+	\end{itemize}
+\end{remark}
+
+\begin{definition}
+	For every player $i \in \{1,\ldots,N\}$, a pure strategy for player $i$, denoted by $\underline{\alpha}_i$, is a function from $\Theta_i$ to $A_i$. The set of pure strategy for player $i$ is denoted by $\mathcal{A}_i$. 	A pure strategy profile, denoted by $\underline{\balpha}$, is the collection of $N$ pure strategies among players, namely 
+	$$
+	\underline{\balpha} = (\underline{\alpha}_1, \ldots, \underline{\alpha}_N) \in \mathcal{A}_1 \times \ldots \times \mathcal{A}_N.
+	$$
+	The set of pure strategy profiles is denote by $\mathcal{A} = \mathcal{A}_1 \times \ldots \times \mathcal{A}_N$.
+	
+	The Bayesian cost associated to player $i$ is defined as a real valued function on $\mathcal{A}$, denoted by $J^i: \mathcal{A} \to \mathbb{R}$, such that
+	$$
+	\hat{J}^i(\underline{\balpha}) = \int_{\Omega} \int_\Theta J^i(w, \btheta, \underline{\balpha}(\theta) ) \rho(d\omega, d\theta)
+	$$
+	where $\btheta = (\theta_1, \ldots, \theta_N)$ and $\underline{\balpha}(\btheta) = (\underline{\alpha}_1(\theta_1), \ldots, \underline{\alpha}_N(\theta_N) )$.	
+\end{definition}
+
+
+\begin{remark}
+	In the above definition of Bayesian cost associated to player $i$, we see that her action depends only on her own type $\theta_i$. This is called distributed actions.
+	
+	Besides, in some cases, the Bayesian cost for player $i$ is defined with respect to the conditional distribution
+	$$
+	\rho(dw, d\theta^{-i} | \theta_i).
+	$$
+	The conditional cost is integrated over $\Omega \times \Theta^{-i}$ and denoted by $J^i(\balpha | \theta^i)$.
+\end{remark}
+
+
+\begin{definition}
+	In the pure strategy setting, a pure strategy profile $\underline{\balpha}^* \in \mathcal{A}$ is said to be a Bayesian Nash equilibrium (BNE for short) of the Bayesian game $\mathcal{G}(\Omega ,\Theta, A, J)$ if for every $i \in \{1,\ldots, N\}$, for every $\underline{\alpha}_i \in \mathcal{A}_i$, we have
+	$$
+	\hat{J}^i(\balpha^*) \geq \hat{J}^i( \underline{\alpha}_i, \underline{\balpha}^*_{-i} ) 
+	$$
+	where $(\underline{\alpha}_i, \underline{\balpha}_{-i}^*) = (\underline{\alpha}_1^*, \ldots, \underline{\alpha}_{i-1}^*, \underline{\alpha}_i, \underline{\alpha}_{i+1}^*, \ldots, \underline{\alpha}_N^*)$.
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Auctions}
+
+Let us now turn to auctions. We consider $N$ players (bidders) who want to buy some object. We consider here a one round sealed-bid auction in which players propose their bids individually and simultaneously (sealed-bids). Depending on all these bids, only one player, called her winner, will get the object and she will have to pay a certain amount of money in return for the object.
+
+We model this one round sealed-bid auction with a $N$ player Bayesian game $\mathcal{G}(\Theta, A, J, \rho)$. More precisely, 
+\begin{itemize}
+	\item  there is no state space;
+	\item  the type of player $i$ is her valuation of the object, denoted by $v_i$. We assume that there is a maximum value $\bar v$ so that $\theta_i \in [0, \bar{v}]$ for each $i$;
+	\item  the action of player $i$ is her bid for the object , denoted by $\alpha_i $. The set of feasible actions for player $i$ is all positive bid, i.e. $A_i = [0,\infty)$. 	We assume that all bids are i.i.d. with distribution $\rho$ on $[0,\infty)$. 	
+\end{itemize} 
+
+\begin{remark}
+	The common distribution $\rho$ on $\mathbb{R}$ reflects an assumption that all players are symmetric in the auction.
+\end{remark}
+
+The next question to define the auction mechanism. We need to precise the way how the winner is chosen as well as the amount of money she is required to pay for. There are many types of auctions. 
+
+The most two popular types are the English auction and the Dutch auction. The English auction is an multi-round ascending auction.  It starts from a very low price proposed by the auction organizer. At each round, buyers accept the proposed price remain in the auction and go into the next round. The auction organize increase the proposed price progressively and the last buyer left in the auction wins. The Dutch auction is a multi-rounds descending auction. It starts from a very high price and the proposed price keeps on descending. The first buyer who accept the price wins the auction. 
+
+Here, we only focus on a one-round sealed-bid auction. There are two cases, called the first price auction and the second price auction. In both cases, the player whose bid is the highest among all players wins the auction. The winner needs to pay either the highest bid among all players including herself (first price auction), or to pay the highest bid among all bids proposed players except herself (second price auction) in return for the object. The second price auction is called the Vickrey auction. 
+
+If ties occur, i.e., if there are multiple players propose simultaneously the highest bid, the winner is chosen among them uniformly at random. And in this case, the winner of the first price auction or the second price auction has to pay the highest bid.
+
+
+In the first price auction, the cost function for player $i \in \{1,\ldots,N\}$ is given by the function $J^i : \Theta \times A \to \mathbb{R}$ such that
+$$
+J^i(\btheta, \balpha) = \left\{
+\begin{array}{lc}
+0 & if \, \alpha_i < \max_{j \neq i} \alpha_j \\
+\displaystyle \theta_i - \alpha_i & if \, \alpha_i > \max_{j \neq i} \alpha_j \\
+\\
+\displaystyle ( \theta_i- \alpha_i ) \cdot Bern\left(\frac{1}{\displaystyle | \{j | \alpha_j = a_i \} |} \right) & if \, \alpha_i = \max_{j \neq i} \alpha_j
+\end{array}
+\right. 
+$$
+where $Bern(p)$ is a Bernoulli random variable in $\{0,1\}$ with $\mathbb{P}(Bern(p) = 1) = p$. 
+
+In the second price auction, the cost function for player $i\in\{1,\ldots,N\}$ turns out to be
+$$
+J^i(\btheta, \balpha) = \left\{
+\begin{array}{lc}
+0 & if \, \alpha_i < \max_{j \neq i} \alpha_j \\
+\theta_i - \max_{j \neq i} \alpha_j  & if \, \alpha_i > \max_{j \neq i} \alpha_j \\
+\\
+\displaystyle 
+( \theta_i - \max_{j\neq i} \alpha_j  ) \cdot Bern \left( \frac{1}{\{j | \alpha_j = a_i \} |} \right) & if \, \alpha_i = \max_{j \neq i} \alpha_j 
+\end{array}
+\right. 
+$$
+
+
+Players intend to maximize their individual cost independently.
+
+\begin{definition}
+	For a single player $i \in \{1,\ldots,N\}$, a pure strategy $\underline{\alpha}_i \in \mathcal{A}_i$ is said to be a dominant strategy if for every $\underline{\alpha}_j \in \mathcal{A}_j$ with $j\neq i$, and for every $\underline{\tilde{\alpha}}_i \in \mathcal{A}_i$, we have
+	$$
+	\hat{J}^i(\underline{\alpha}_i, \underline{\balpha}_{-i})  \geq \hat{J}^i( \underline{\tilde{\alpha}}_i, \underline{\balpha}_{-i} ).
+	$$ 
+	In words, no matter what other players are doing, the Bayesian cost incurred by taking the pure strategy $\underline{\alpha}_i$ for player $i$ is no worse than the Bayesian cost when she picks another pure strategy $\tilde{\underline{\alpha}}_i$.
+\end{definition}
+
+
+
+\begin{assumption}
+	We assume that all players know their own evaluation of the object, i.e. player $i$ knows her own type $\theta_i \in [0, \bar{v}]$. 
+\label{assumption:Auction_thuthful_bid_Vickrey}
+\end{assumption}
+
+\begin{remark}
+Under assumption \ref{assumption:Auction_thuthful_bid_Vickrey}, the prior distribution for all players for their types becomes $\prod_{i=1}^N \delta_{\theta_i}$. And the Bayesian cost associated to player $i$ takes the form
+$$
+	\hat{J}^i(\underline{\balpha}) = J^i(\theta, \underline{\balpha}(\theta)), \forall \, \underline{\alpha} \in \mathcal{A}
+$$
+where $\theta = (\theta_1, \ldots, \theta_N)$ is prescribed.
+\end{remark}
+
+\begin{theorem}
+	Under Assumption \ref{assumption:Auction_thuthful_bid_Vickrey}, in a second price auction $\mathcal{G}(\Theta, A,J, \rho)$, for any player $i\in\{1,\ldots,N\}$,  the pure strategy $\underline{\alpha}^*_i \in \mathcal{A}_i$ satisfies that
+	$$
+	\underline{\alpha}^*_i (\theta_i) = \theta_i, \qquad \forall \theta_i \in\Theta_i
+	$$
+	is a dominant strategy for player $i$. 
+	
+	In words, if player $i$ wants to minimize her own cost without knowing how other players behave in the auction, she should play truthfully according to her own evaluation of the object
+	\label{theorem:Acution_truthful_bid_Vickrey_auction}
+\end{theorem}
+
+\begin{corollary}
+	The pure strategy profile $\underline{\balpha^*} = (\underline{\alpha}_1^*, \ldots, \underline{\alpha}_N^*)$ satisfying
+	$$
+	\underline{\alpha}^*_i (\theta_i) = \theta_i, \qquad \forall \theta_i \in\Theta_i	
+	$$
+	for every $i\in\{1,\ldots,N\}$ is a Bayesian Nash equilibrium.
+\end{corollary}
+
+\begin{proof}(Proof of Theorem \ref{theorem:Acution_truthful_bid_Vickrey_auction})
+	We idea of the proof relies on the fact that in second price auction, the pure strategy of player $i$ only affects whether or not she wins the auction, but the cost associated to player $i$ does not depend on her own strategy.
+	
+	Suppose that all other players except player $i$ chose pure strategies $\hat{\underline{\alpha}}_j \in \mathcal{A}_j$ for $j \neq i$. Under Assumption \ref{assumption:Auction_thuthful_bid_Vickrey}, all players know their own type. Let us denote the highest bid for all other players by
+	$$
+		\hat{\beta} := \max_{j \neq i} \hat{\underline{\alpha}}_j (\theta_j) .
+	$$	
+	
+	If player $i$ chooses strategy $\underline{\alpha}_i \in \mathcal{A}_i$, the Bayesian cost associated to player $i$ becomes
+	$$
+		\hat{J}^i(\underline{\alpha}_i, \hat{\underline{\balpha}}_{-i} ) = \left\{
+		\begin{array}{lc}
+			0 & if \,  \underline{\alpha}_i(\theta_i) < \hat{\beta} \\
+			\theta_i - \hat{\beta} & if \, \underline{\alpha}_i(\theta_i) > \hat{\beta} \\
+			\\
+			\displaystyle ( \theta_i- \hat{\beta} )\cdot Bern\left( \frac{1}{| \{j \neq i : \hat{\underline{\alpha}}_j(\theta_j) = \hat{\beta}\} | + 1} \right) & if\, \underline{\alpha}_i(\theta_i) = \hat{\beta} \\
+		\end{array}
+		\right.
+	$$
+	
+	We suppose that player $i$ choose an alternative strategy $\hat{\underline{\alpha}}_i \in \mathcal{A}_i$ than $\underline{\alpha}_i^*$. Thus, her bid, denoted by $\beta_i = \hat{\underline{\alpha}}_i(\theta_i) \in [0, \infty)$, is different from $\theta_i = \underline{\alpha}_i^*(\theta_i)$. 
+	There are two situations:
+	\begin{itemize}
+		\item When $\beta_i < \theta_i$. 
+		\begin{itemize}
+			\item	if $\hat{\beta} > \theta_i > \beta_i$ or $\hat{\beta}< \beta_i < \theta_i$, player $i$ has the same Bayesian cost for both pure strategy $\hat{\underline{\alpha}}_i$ and $\underline{\alpha}_i^*$;
+			\item  if $\beta_i < \hat{\beta} < \theta_i$, then the Bayesian cost for employing strategy $\underline{\alpha}_i^*$ is $\theta_i- \hat{\beta}$, whilst the Bayesian cost incurred with the pure strategy $\hat{\underline{\alpha}}_i$ is $0$. Thus
+			$$
+				\hat{J}^i(\underline{\alpha}_i^*, \hat{\underline{\balpha}}_{-i}) = \theta_i - \hat{\beta} > 0 =  \hat{J}^i(\hat{\underline{\alpha}}_i, \hat{\underline{\balpha}}_{-i});
+			$$
+			\item if $\hat{\beta} = \theta_i > \beta_i$, then 
+			$$
+				\hat{J}^i(\underline{\alpha}_i^*, \hat{\underline{\balpha}}_{-i}) = (\theta_i-\hat{\beta}) \cdot Bern\left( \frac{1}{|\{ j\neq i: \hat{\underline{\alpha}}_j(\theta_j) = \hat{\beta} \} |} \right) = 0 = \hat{J}^i(\hat{\underline{\alpha}}_i, \hat{\underline{\balpha}}_{-i}).
+			$$ 
+			\item if $\hat{\beta} = \beta_i < \theta_i$, then
+			$$
+				\hat{J}^i(\underline{\alpha}_i^*, \hat{\underline{\balpha}}_{-i}) =  \theta_i- \hat{\beta} \geq (\theta_i - \hat{\beta}) \cdot Bern\left( \frac{1}{|\{ j\neq i: \hat{\underline{\alpha}}_j(\theta_j) = \hat{\beta} \} |} \right) = \hat{J}^i(\hat{\underline{\alpha}}_i, \hat{\underline{\balpha}}_{-i}).
+			$$
+			Because the Bernoulli random variable only takes value in $\{0,1\}$.
+		\end{itemize}
+		\item When $\beta_i > \theta_i$. Idem.
+	\end{itemize}
+	Therefore, we conclude that for any pure strategies $\hat{\underline{\alpha}}_j \in \mathcal{A}_j$ for $j=1, \ldots,N$, we have
+	$$
+		\hat{J}^i(\underline{\alpha}_i^*, \hat{\underline{\balpha}}_{-i} ) \geq \hat{J}^i( \hat{\underline{\alpha}}_i, \hat{\underline{\balpha}}_{-i} ).
+	$$
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{symmetric auction}
+
+\begin{definition}
+An auction is said to be symmetric, denote by $\mathcal{G}(\Theta_0, A_0, J, \rho)$, if
+\begin{itemize}
+	\item all players share a common type space $\Theta_0 = [0, \overline{v}]$, and the set of all type profile is still denote by $\Theta = (\Theta_0)^N$;
+	\item the type of an individual player is independently distributed according to a common prior distribution $\rho \in \mathcal{P}([0, \overline{v}])$, and the prior distribution for all $N$ players is the product distribution, denoted by $\rho^N := \rho \times \ldots \times \rho$;
+	\item all players share a common feasible action space $A_0= [0, \infty)$, and the set of all admissible strategy profile is still denote by $A := (A_0)^N$;
+	\item all players follow the same common pure strategy, namely for any admissible strategy profile $\underline{\balpha}= (\underline{\alpha}_1, \ldots, \underline{\alpha}_N) \in \mathcal{A}$, there exists an pure strategy $\underline{\alpha}: \Theta_0 \to A_0$ such that $\underline{\alpha}_i = \underline{\alpha}$ for all $i \in \{1,\ldots, N\}$. The set of all admissible common pure strategies is denote by $\mathcal{A}_0$.
+	\item players can have different cost function $J^i: \Theta \times A \ni (\btheta, \balpha) \mapsto J^i(\btheta, \balpha) \in \mathbb{R}$.
+\end{itemize} 
+\end{definition}
+
+
+A pure strategy for player $i$, say $\underline{\alpha}_i \in \mathcal{A}_0$, is continuous and increasing if $\underline{\alpha}_i$ is continuous in $(0, \bar{v})$, and left and right continuous on $\overline{v}$ and $0$, i.e.$\lim_{\theta \to 0} \underline{\alpha}(\theta) = \underline{\alpha}(0)$ and $\lim_{\theta \to \bar{v}} \underline{\alpha}(\theta) = \underline{\alpha}(\bar{v})$, and it is also increasing on $[0,\bar{v}]$. 
+
+
+\begin{assumption}
+	We assume that the support of $\rho \in \mathcal{P}([0,\overline{v}])$ is $[0, \overline{v}]$, namely there is no open interval $(a,b) \subseteq [0, \overline{v}]$ such that $\rho((a,b)) =0$.
+\label{assumption:Auction_symmetric_full_support}
+\end{assumption}
+
+The prior distribution of $N$ players is denoted by $\rho^N(d\btheta) = \rho(d\theta_1) \times \ldots \times \rho(d\theta_N)$ where $\btheta = (\theta_1, \ldots, \theta_N)$.
+
+
+In the symmetric auction, recalled that the Bayesian cost function associated to player $i$ evaluated at a strategy profile $\underline{\balpha} \in \mathcal{A}$ can be written as
+\begin{eqnarray}
+	\hat{J}^i(\underline{\balpha}) &=& \int_{\Theta} J^i(\btheta, \underline{\balpha}(\btheta) ) \rho^N(d\btheta) \nonumber \\
+	&=& \int_{[0, \bar{v}]}\left( \int_{\Theta_{-i}}  J^i((\theta_i, \btheta_{-i}), \,  (\underline{\alpha}(\theta_1), \ldots, \underline{\alpha}(\theta_N) ) ) \prod_{j\neq i}\rho(d\theta_j) \right) \rho(d\theta_i)
+\end{eqnarray}
+where $\underline{\alpha}$ is a the common pure strategy among players, and the second equality is justified by the fact that prior distribution $\rho^N$ for all players is a production distribution.
+
+\begin{definition}
+	The conditional Bayesian cost for player $i$ with type $\theta_i$ and pure strategy $\underline{\beta} \in \mathcal{A}_0$ is defined as a function from $\mathcal{A}$ to $\mathbb{R}$ such that
+	$$
+		\hat{J}^i(\underline{\beta}, \underline{\balpha}_{-i} | \theta_i) = \int_{\Theta_{-i}} J^i( (\underline{\beta}(\theta_i), \btheta_{-i}), \, (\underline{\beta}(\theta_i), \underline{\balpha}_{-i}(\btheta_{-i} ) ) ) \rho^{N}(d\btheta_{-i}| \theta_i )
+	$$
+ 	where $\rho^{N}(d\btheta_{-i} | \theta_i) = \prod_{j \neq i} \rho(d\theta_j)$.
+\end{definition}
+
+
+\begin{definition}
+	We say that a pure strategy profile $\underline{\balpha} \in \mathcal{A}$ with a common pure strategy $\underline{\alpha}:\Theta_0 \to A_0$ is a Bayesian Nash equilibrium for a symmetric auction if and only if for every $i \in \{1,\ldots,N\}$ and for every $\theta_i \in \Theta_0$, we have
+	\begin{equation}
+		\underline{\alpha}(\theta_i) \in \argmax_{\beta \in A_0} \hat{J}^i( \beta, \underline{\balpha}_{-i}(\cdot) | \theta_i)
+	\end{equation}
+	where $\beta$ is a constant pure strategy equaled to $\beta \in A_0$ for all $\theta_i \in \Theta_0$, and $(\beta, \underline{\balpha}_{-i}(\btheta_{-i} ) ) = (\underline{\alpha}(\theta_1), \ldots, \underline{\alpha}(\theta_{i-1}), \beta, \underline{\alpha}(\theta_{i+1}), \ldots, \underline{\alpha}(\theta_N) )$ for any $\btheta_{-i} \in (\Theta_0)^{N-1}$.
+\end{definition}
+
+
+\subsubsection{second price auction}
+Assume that there is no tie between players, and the cost function for player $i$ is defined as 
+$$
+	J^i(\btheta, \balpha) = (\theta_i - \max_{j \neq i} \alpha_j) \mathbbm{1}_{\alpha_i > \max_{j \neq i} \alpha_j}. 
+$$
+
+\begin{proposition}
+	In a symmetric auction, under Assumption \ref{assumption:Auction_symmetric_full_support}, the admissible pure strategy profile $\underline{\balpha}^* \in \mathcal{A}$ defined by  
+	$$
+	\underline{\alpha}^*_i(\theta) = \underline{\alpha}^*(\theta) = \theta, 
+	\quad \forall \theta \in [0, \infty), \, i \in \{1,\ldots, N\}
+	$$
+	is the unique symmetric continuous increasing Bayesian Nash equilibrium, where $\underline{\alpha}^*: [0,\bar{v}] \ni \theta \mapsto \underline{\alpha}^*(\theta) = \theta \in [0, \infty)$ is the common pure strategy mapping for all players.
+\end{proposition}
+
+\begin{proof}
+	Let $\hat{\beta} : [0,\bar{v}] \to [0,\infty)$ be the common pure strategy mapping related to a symmetric continuous increasing Bayesian Nash equilibrium. We will show that $\hat{\beta} = \underline{\alpha}^*$.
+	
+	According to the second price auction payoff, the conditional Bayesian cost for player $i$ with type $\theta_i$ takes the form
+	$$
+	\hat{J}^i(\hat{\beta}(\cdot), \hat{\bbeta}_{-1}(\cdot) ) | \theta_i) = \int_{\Theta_{-i}} \left(\theta_i - \max_{j\neq i} \hat{\beta}(\theta_j) \right) \mathbbm{1}_{ \{ \hat{\beta}(\theta_i) > \max_{j \neq i} \hat{\beta}(\theta_j)  \} } \rho^N(d\btheta_{-i} | \theta_i)
+	$$
+	and 
+	$$
+	\hat{J}^i(\underline{\alpha}^*(\cdot), \hat{\bbeta}_{-1}(\cdot) ) | \theta_i) = \int_{\Theta_{-i}} \left(\theta_i - \max_{j\neq i} \hat{\beta}(\theta_j) \right) \mathbbm{1}_{ \{ \theta_i > \max_{j \neq i} \hat{\beta}(\theta_j)  \} } \rho^N(d\btheta_{-i} | \theta_i)
+	$$
+	Since $\hat{\beta}$ is the common pure strategy for a Bayesian Nash equilibrium, by definition, we must have
+	$$
+	\hat{J}^i(\hat{\beta}(\theta_i), \hat{\bbeta}_{-i}(\cdot) |  \theta_i)  \geq \hat{J}^i(\underline{\alpha}^*(\theta_i), \hat{\bbeta}_{-i}(\cdot) | \theta_i)
+	$$
+	where $(\beta, \hat{\bbeta}_{-i}(\btheta_{-i}) ) = (\hat{\beta}(\theta_1), \ldots, \hat{\beta}(\theta_{i-1}), \beta, \hat{\beta}(\theta_{i+1}),  \ldots, \hat{\beta}(\theta_N))$ for any $\btheta_{-i} \in (\Theta_0)^{N-1}$ and $\beta \in A_0$.
+	
+	
+	Step 1:  we show that for every $\theta \in [0, \overline{v}]$, $\hat{\beta}(\theta) \leq \theta$. Otherwise, there must exist a $\theta \in [0, \overline{v}]$ such that $\hat{\beta}(\theta) > \theta$. If $\hat{\beta}(0) > 0$, then by the left continuity at point $0$, there must exist a $\theta > 0$ such that $\hat{\beta}(\theta) > \theta$. Similarly, if $\hat{\beta}(\bar{v}) > \bar{v}$, then there exists an $\theta < \bar{v}$ such that $\hat{\beta}(\theta) > \theta$. Thus, we can always pick an $\theta \in (0, \overline{v}]$ satisfying $\hat{\beta}(\theta) > \theta$.
+	
+	For any fixed player $i\in \{1,\ldots,N\}$, suppose that her type equals to $\theta_i = \theta$. 
+
+	Since $\hat{\beta}(\theta) > \theta$, we know that for any $\btheta_{-i} \in (\Theta_0)^{N-1}$ such that $\max_{j\neq i } \hat{\beta}(\theta_j) > \hat{\beta}(\theta)$ or $\max_{j\neq i } \hat{\beta}(\theta_j) < \theta$, the conditional Bayesian costs for player $i$ with pure strategy $\hat{\beta}$ and $\underline{\alpha}^*$ have the same value. Otherwise if $\btheta_{-i} \in (\Theta_0)^{N-1}$ such that
+	$$
+		\theta < \max_{j\neq i} \hat{\beta}(\theta_j) < \hat{\beta}(\theta),
+	$$
+	then 
+	$$
+	\theta - \max_{j\neq i} \hat{\beta}(\theta_j)  < 0 = \left(\theta - \max_{j\neq i} \hat{\beta}(\theta_j) \right) \mathbbm{1}_{ \{ \theta > \max_{j \neq i} \hat{\beta}(\theta_j)  \} }
+	$$
+	Hence, if the set $\{\btheta_{-i} | \theta < \max_{j \neq i}\hat{\beta}(\theta_j) < \hat{\beta}(\theta) \}$ has a positive measure, then 
+	$$
+		\hat{J}^i(\hat{\beta}(\theta), \hat{\bbeta}_{-i}(\cdot) | \theta) < \hat{J}^i(\underline{\alpha}^*(\theta), \hat{\bbeta}_{-i}(\cdot) | \theta),
+	$$
+	which contradicts to the fact that $\hat{\beta}$ is a Bayesian Nash equilibrium.
+	
+	Now, we construct explicitly a subset $B_i \subseteq \{ \btheta_{-i} | \theta < \max_{j \neq i}\hat{\beta}(\theta_j) < \hat{\beta}(\theta) \}$ with a positive measure if such a $\theta$ satisfying $\hat{\beta}(\theta) > \theta$ exists.	
+	
+	By continuity of $\hat{\beta}$ on $(0, \bar{v})$, there exists a $t \in (0, \theta)$ such that $\hat{\beta}(t) > \theta$. For any fixed $i\in \{1,\ldots,N\}$, we assume that the type of player $i$ is $\theta_i = \theta$. under assumption \ref{assumption:Auction_symmetric_full_support}, we know that
+	$$
+		\mathbb{P}( \{ \theta_j \in (t, \theta) : j \neq i \} ) = \prod_{j\neq i} \rho((t, \theta) ) > 0.
+	$$
+	Let us denote by 
+	$$
+	B_i = \{ \btheta_{-i} \in (\Theta_0)^{N-1} | \, \theta_j \in (t, \theta), \, \forall \, j\neq i\}.
+	$$	
+	
+	For any $\btheta_{-i} \in B_i$, since $\hat{\beta}$ is increasing, we have $\hat{\beta}(\theta) > \hat{\beta}(\theta_j)$ for all $j\neq i$. (no tie bids between players). This implies that 
+	$$
+		\hat{\beta}(\theta) > \max_{j \neq i} \hat{\beta}(\theta_j).
+	$$
+	Moreover, since $\theta_j > t$, we have $\hat{\beta}(\theta_j) > \hat{\beta}(t) > \theta$.
+	Thus
+	$$
+		\max_{j \neq i} \hat{\beta}(\theta_j) > \theta.
+	$$
+	By consequence, the set $B_i$ with positive measure is a subset of $ \{ \btheta_{-i} | \theta < \max_{j \neq i}\hat{\beta}(\theta_j) < \hat{\beta}(\theta) \}$. 
+	Together with the previous discussion, we show that for all $\theta \in [0, \overline{v}]$, we have $\hat{\beta}(\theta) \leq \theta$.
+	
+	
+
+	Step 2: we show that for every $\theta \in [0,\overline{v}]$, $\hat{\beta}(\theta) \geq 0$. Otherwise, there exists a $\theta \in (0, \bar{v})$ such that $\hat{\beta}(\theta) < \theta$.
+	Then, there exists $t \in (\theta, \bar{v})$ such that  $\hat{\beta}(t) < \theta$.
+	
+	Fixed $i \in \{1,\ldots,N\}$ and consider that player $i$ has a type $\theta_i = \theta$.
+	
+	Now consider the subset $B_i = \{ \btheta_{-i} \in (\Theta_0)^{N-1} | \theta_j \in (\theta, t), \, j \neq i\}$. Then $\mathbb{P}(B_i) > 0$. By monotonicity argument, we can have that for all $j \neq i$:
+	$$
+		\hat{\beta}(\theta) \leq \hat{\beta}(\theta_j),
+	$$
+	thus
+	$$
+		\hat{\beta}(\theta) < \max_{j \neq i} \hat{\beta}(\theta_j).
+	$$
+	Meanwhile, for any $\btheta_{-i} \in B_i$, we know that $\theta_j < t$ for all $j \neq i$. Then, we have
+	$$
+		\hat{\beta}(\theta_j) \leq \hat{\beta}(t) < \theta,
+	$$
+	which implies
+	$$
+		\max_{j \neq i} \hat{\beta}(\theta_j) < \theta.
+	$$
+	Thus, with truthful bidding (using strategy $\underline{\alpha}^*$), the player $i$ will certainly win the auction with positive profit $\theta - \max_{j \neq i} \hat{\beta}(\theta_j) > 0$. This contradicts to $\hat{\beta}$ is a Bayesian Nash equilibrium. 
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{First price symmetric auction}
+
+Let us denote by $F: [0, \overline{v}] \to [0,1]$ the c.d.f. of the distribution $\rho \in \mathcal{P}([0, \overline{v}] )$.  Since players are symmetric, we assume that player $1$ wins the auction. If all admissible pure strategy profile are symmetric, continuous and increasing, then for any $\underline{\alpha} \in \mathcal{A}_0$ and $\btheta \in (\Theta_0)^N$ such that $\underline{\balpha}(\btheta) = (\underline{\alpha}(\theta_1), \ldots, \underline{\alpha}(\theta_N)) \in A$, we have
+$$
+	\underline{\alpha}(\theta_1) > \max_{j \neq i} \underline{\alpha}(\theta_j) \Longleftrightarrow \theta_1 > \max_{j \neq 1} \theta_j.
+$$
+Let denote the highest type of all other players ($j \neq 1$) by
+$$
+Z = \max_{j \neq 1} \theta_j.
+$$
+The c.d.f. of the random variable $Z$ is denote by $G: \Theta_0 \to [0,1]$. We know that
+$$
+G(z) = \mathbb{P}(Z \leq z) = \mathbb{P}( \theta_j \leq z, \, j\neq 1) = F(z)^{N-1}.
+$$
+
+We define the conditional expectation of $Z$ on the event $\{ Z < \theta\}$ for some $\theta \in [0, \overline{v}]$ by
+$$
+\mathbb{E}[Z | Z < \theta] = \frac{1}{G(\theta)} \int_{0}^{\theta} z G(dz).
+$$
+
+
+
+\begin{definition}
+	The payment from player $i$ to the auctioneer when the type profile is $\btheta \in \Theta$ is denoted by $p_i(\btheta)$.	
+	
+	Suppose that the player $i$ know her own type $\theta_i$ and she believes that the other players types is drawn independently from a distribution $\rho$, then the expected payment for player $i$ is denote by 
+	$
+		\mathbb{E}[p_i(\btheta) | \theta_i].
+	$
+\end{definition}
+
+In the second price auction, the expected payment to the auctioneer by the winner at Bayesian equilibrium equals to the probability that she wins the auction times the conditional expectation of second highest bid.  If the auction is symmetric and with increasing and continuous admissible pure strategies, and let us say player $1$ wins the auction, then
+\begin{eqnarray*}
+\mathbb{E}[p_1(\btheta)|\theta_1] &=& \mathbb{P}\left(\underline{\alpha}^*(\theta_1) > \max_{j\neq 1} \underline{\alpha}^*(\theta_j) \right) \cdot \mathbb{E}\left[ \max_{j\neq 1} \underline{\alpha}^*(\theta_j) | \max_{j \neq 1}\underline{\alpha}^*(\theta_j) < \underline{\alpha}^*(\theta_1) \right]\\
+&=& \mathbb{P}(\theta_1 > Z) \mathbb{E}[Z | Z < \theta_1 ] \\
+&=& G(\theta_1) \mathbb{E}[Z | Z < \theta_1] 
+\end{eqnarray*}
+where the second equality is justified by the truthful bidding in second price auction.\\
+
+
+Now let us look at the first price auction. The cost function for player $i$ takes the form
+$$
+J^i(\btheta, \balpha) = (\theta_i - \alpha_i ) \mathbbm{1}_{\alpha_i \geq \max_{j \neq i} \alpha_j}.
+$$
+for all $\btheta \in (\Theta_0)^N$ and $\balpha \in A$.
+
+\begin{proposition}
+	If $\mathcal{G}(\Theta_0, A_0, J, \rho)$ is a symmetric first price auction, and if any admissible pure strategy $\underline{\alpha} \in \mathcal{A}_0$ satisfies $\underline{\alpha}(0) = 0$, then
+	$$
+		\underline{\alpha}^*(\theta) = \mathbb{E}[Z | Z < \theta]
+	$$
+	is the unique symmetric continuous increasing Bayesian Nash equilibrium.	
+\end{proposition}
+
+\begin{proof}
+	Assume that player $1$ plays with a bid $b \in A_0$. If she wins the auction, then
+	$$
+		b > \max_{j \neq 1}  \underline{\alpha}^*(\theta_j) = \underline{\alpha}^*( \max_{j \neq 1} \theta_j) 
+	$$
+	where the second equality comes from the monotonicity of pure strategy $\underline{\alpha}^*$.
+	
+	Since an increasing function is invertible, let us denote by 
+	$$\theta^* := \inf_{\theta \in [0, \overline{v}]} (\underline{\alpha}^*)^{-1}(b)$$
+	Then, we can have
+	$$
+		\max_{j \neq 1} \theta_j < \theta^* .
+	$$
+	{\color{red} more precision should be made for the definition of $\theta^*$ when the pure strategy is not strictly increasing}
+		
+
+	Then for any type $\theta_1 \in \Theta_0$,
+	\begin{eqnarray}
+		\mathbb{P}(\text{player 1 wins} | \theta_1) &=& \mathbb{E}\left[ \mathbbm{1}_{ \{\underline{\alpha}^*(\theta_1) > \max_{j \neq 1} \underline{\alpha}^*(\theta_j)) \} } \right] \nonumber \\
+		&=& \mathbb{P}( \theta_1 \geq \theta^*  ) \\
+		&=& G(\theta^*) 
+	\end{eqnarray}
+	
+	Since $\underline{\alpha}^*(\theta_1)$ is the best response for player $1$, so that with this bid, player $1$ should maximizes her expected winning. For any given $\theta_1$, and any other alternative bid $b$, we have
+	$$
+	\mathbb{E}[her\, winning | \theta_1] = \hat{J}^1(\underline{\balpha}^* | \theta_1) = (\theta_1 - b) \cdot \mathbb{P}( \text{ player 1 wins} | \theta_1) = (\theta_1 - b) G( (\underline{\alpha}^*)^{-1}(b) ).
+	$$
+	
+	
+	By taking the derivative w.r.t. $b$, the derivative equals to $0$ when $\theta^* = \theta_1$ (FOC), namely
+	$$
+		- G( \theta_1) + (\theta_1 - b) \frac{ G'(\theta_1) }{ (\underline{\alpha}^*)' (\theta_1)}  = 0.
+	$$
+	where $G'(z) = \frac{d G(z)}{dz}$ and $(\underline{\alpha^*})' (\theta) = \frac{d \underline{\alpha}^*(\theta)}{d \theta}$.
+	
+	Then for every $\theta_1 \in \Theta_0$, we can have
+	\begin{eqnarray*}
+		0 &=& - \left[ G(\theta_1) \cdot (\underline{\alpha}^*)' (\theta_1) + G(\theta_1)' \cdot (\alpha^*)'(\theta_1) \right] + \theta_1 G'(\theta_1) \\
+		&=& - \left( G \underline{\alpha}^* \right)' (\theta_1) + \theta_1 \cdot G'(\theta_1)
+	\end{eqnarray*}
+	
+	If $\underline{\alpha}^*(0) = 0$, then we can have for every $\theta \in \Theta_0$,
+	$$
+		- G(\theta) \underline{\alpha^*}(\theta) + \int_0^\theta z G(z) dz = 0.
+	$$
+	In conclusion, the pure strategy corresponded to a Bayesian Nash equilibrium takes the form
+	$$
+		\underline{\alpha}^*(\theta) = \frac{1}{G(\theta) } \int_0^\theta z G(z) dz = \mathbb{E}[Z | Z < \theta].
+	$$	
+\end{proof}
+
+
+\begin{remark}
+	If player $i$ wins by bidding $\underline{\alpha}^*(\theta_1)$, then the expected payment from player $1$ to the auctioneer becomes
+	$$
+		\mathbb{E}[p_1(\btheta)| \theta_1] = \underline{\alpha}^*(\theta_1) G(\theta_1)
+	$$
+	where the first term corresponded to the amount paid to the auctioneer, and the second term corresponded to the probability that player 1 wins the auction.
+\end{remark}
+
+ 
+\begin{theorem}[Revenue Equivalence]
+	For any sealed-bid auction where the object goes to the highest bidder. If the values are i.i.d., and if the players are risk neutral (each maximizes her own cost function). any symmetric strategy which is increasing gives the same expected payment to the auctioneer.
+\end{theorem}
+
+
+{\color{red}
+\begin{remark}
+	For the theorem of Revenue Equivalence, we need to assume that $0-$valued players pay nothing, i.e. for any pure strategy $\underline{\alpha} : [0,\overline{v}] \to A_0$, we have $\underline{\alpha}(0) = 0$.	
+\end{remark}
+}
+
+

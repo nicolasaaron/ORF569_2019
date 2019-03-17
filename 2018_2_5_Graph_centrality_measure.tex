@@ -1,0 +1,167 @@
+\section{Game on graphs}
+
+\subsection{Basic notations}
+
+An \textbf{undirected graph} $G$ consists of a non-empty finite set $V$ of elements called \textbf{vertices} (or \textbf{nodes}), and a finite set $E \subset V\times V$ of unordered pairs of (not necessarily distinct) vertices called \textbf{edges}.  An undirected graph with a vertex set and an edge set $E$ is written like $G=(V,E)$. For example, a graph for n agents, labeled by $1,2,\ldots,N$, can be represented by a vertex set $V=\{1,2,\ldots, N \}$ and an edge set $E$ of pairs $(i,j)$ for $i,j \in V$ such that agent $i$ is said to be ``connected" to agent $j$ if $(i,j) \in E$. The term ``set" in the edge set $E$ emphasizes that there is at most one edge joining any two vertices in $V$.
+
+We say that two vertices $i$ and $j$ of a graph $G$ are \textbf{adjacent} if there is an edge joining them, namely $(i,j) \in E$, and the vertices $i$ and $j$ are then \textbf{incident} with such an edge. The \textbf{degree} of a vertex $i$ of $G$ is the number of edges incident with $i$.
+
+A useful representation of a graph $G=(V,E)$ is with its \textbf{adjacency matrix} $A^{(G)} = [a_{ij}^{(G)}]_{i,j \in V}$. If a graph $G$ has $n$ vertices, its adjacency matrix $A^{(G)}$ is defined as an $n \times n$ matrix whose $ij-th$ entry represents the strength of connection between vertex $i$ and vertex $j$. For example, we can define
+\begin{equation}
+a_{ij}^{(G)} = \left\{
+\begin{array}{ll}
+1 & \quad \text{if  } (i,j) \in E \\
+0 & \quad \text{o.w.}
+\end{array}
+\right.
+\label{eq:adjacency_matrix}
+\end{equation}
+
+The \textbf{spectrum} of a matrix $A$, denoted by $\Sigma(A)$, is the collection of all eigenvalues of $A$. By definition of an undirected graph, $A^{(G)}$ is symmetric, so that its eigenvalues are all real numbers.  Thus, the spectrum of the adjacency matrix $A^{(G)}$ associated to graph $G$ is finite and is a subset of $\mathbb{R}$. We denote by 
+$\lambda_{max}(A^{(G)}) = \max\{\Sigma(A^{(G)}) \}$ 
+and 
+$\lambda_{min}(A^{(G)}) = \min\{\Sigma(A^{(G)}) \}$
+the maximum and minimum eigen values of $A^{(G)}$.
+
+If we assume that $a_{ij}^{(G)} \neq 0$ if and only if $(i,j) \in E$, then a simple computation shows that
+$$
+\left[ \left(A^{(G)} \right)^2 \right]_{i,j} = \sum_{k=1}^N a_{ik}^{(G)} a_{kj}^{(G)},
+$$
+and thus 
+$
+\left[ \left(A^{(G)} \right)^2 \right]_{i,j} \neq 0 
+$
+if and only if there exists a path joining vertex $i$ to vertex $j$ with exactly \textbf{one single hop}. Similarly
+$
+\left[ \left(A^{(G)} \right)^l \right]_{i,j} \neq 0 
+$
+if and only if there exists a path joining vertex $i$ to vertex $j$ with exactly \textbf{ $l$ hops}.
+
+\subsection{Measure of Centrality}
+
+One fundamental problem in network analysis is to identify important nodes in complex networks. Different measures of centrality have been proposed to achieve this objective, for example, PageRank centrality measure \cite{page1999pagerank} that ranks the importance of web pages for online search.
+
+\begin{itemize}
+	\item Katz centrality \cite{katz1953new}: 
+	
+	\begin{definition} Let $G$ be an undirected graph $G=(V,E)$ with $n$ nodes and with an adjacency matrix $A^{(G)}$. Let $a$ be an arbitrary positive parameter strictly smaller than $1/ \lambda_{max}(A^{(G)})$. Then the \textbf{Katz centrality} of $G$ is defined as
+		\begin{equation}
+		k_a(i) = \sum_{k=1}^{\infty} \sum_{j=1}^N \left( a^k \left[\left(A^{(G)}\right)^k \right]_{ij}  \right), \quad \text{for all } i \in V,
+		\end{equation}
+		where $\mathbbm{1}$ represent a vector with elements all equal to 1.
+	\end{definition}
+	
+	Since $0 < a < 1/\lambda_{max}(A^{(G)})$, $I - a A^{(G)}$ is then invertible. Here $I$ stands for the identity matrix in $\mathbb{R}^{n\times n}$. Thus, we drive a matrix notation for Katz centrality as follow:
+	$$
+	k_a = \left( I - a A^{(G)} \right)^{-1} \mathbbm{1} - \mathbbm{1} = a \left( I - a A^{(G)} \right) A^{(G)} \mathbbm{1}.
+	$$
+	
+	\item Bonacich centrality and Degree centrality \cite{bonacich1987power}:
+	
+	\begin{definition}
+		Let $a,b$ be arbitrary parameters such that $b < 1/ \lambda_{max}(A^{(G)})$. The \textbf{Bonacich centrality} is defined as
+		\begin{equation}
+		\mathbbm{b}_{a,b}(i) = \sum_{j=1}^N \left( a+ b\, \mathbbm{b}_{a,b}(j) \right)\cdot a_{ij}^{(G)}.
+		\end{equation}
+		In matrix notation
+		\begin{equation}
+		\mathbbm{b}_{a,b} = a \left( I - b A^{(G)} \right)^{-1} A^{(G)} \mathbbm{1}
+		\end{equation}
+	\end{definition}
+	
+	The parameter $b$ in Bonacich centrality allows us to scale up or down and change the direction (positive or negative) of the dependence of one vertex's score on the scores of other vertices.
+	
+	If $a=1, b=0$, we then have $\mathbbm{b}_{1,0} = A^{(G)} \mathbbm{1}$, so that $\mathbbm{b}_{1,0}(i)$ equals to the degree of vertex $i$ if $A^{(G)}$ takes the form (\ref{eq:adjacency_matrix}). We call $\mathbbm{b}_{1,0}$ the \textbf{Degree centrality}.
+	
+	\item Eigenvector Centrality \cite{Bonacich1972b} \cite{Bonacich1972}
+	
+	This idea behind the Eigenvector centrality is to find a measure on $V$ so that a node is important if it is connected to other important nodes.
+	
+	\begin{definition}
+		We define the \textbf{Eigenvector centrality} as the vector $v$ satisfying
+		\begin{equation}
+		v(i) = \frac{1}{\lambda} \sum_{j=1}^N a_{ij}^{(G)} v(j) 
+		\end{equation}
+		for some real non-zero value $\lambda$ and for any $i \in V$. In matrix notation:
+		\begin{equation}
+		\lambda v = A^{(G)} v.
+		\label{eq:eigenvector_centrality}
+		\end{equation}
+	\end{definition}
+	
+	We intend to find a desirable solution $v$ to equation (\ref{eq:eigenvector_centrality}), especially we want that $v$ is positive (i.e. $v(i)>0$ for any $i\in V$). If the adjacency matrix $A^{(G)}$ is positive, namely if $a_{ij}^{(G)} >0$ for all $i,j \in V$, the Perron-Frobenius theorem tells us that the existence and uniqueness (up to a scalable multiple factor) of a positive eigenvector $v$ and the corresponding eigenvalue is positive and largest in absolute norm, i.e. $\lambda = \max\{ |\lambda(A^{(G)})|: \lambda(A^{(G)}) \text{ eigenvalues } \} = \lambda_{max}(A^{(G)}) > 0$.
+	
+	
+	
+\end{itemize}
+
+
+\subsection{Network games : static situation}
+
+Let us consider a graph $G=(V,E)$ with a vertex set $V=\{1,\ldots, N\}$ representing $N$ different agents/players, and a edge set $E \subset V \times V$. Its adjacency matrix is denoted by $A^{(G)}$. 
+As an example, we consider here a static network game with $N$ players whose connections are described by graph $G=(V,E)$ and adjacent matrix $A^{(G)}$. In this static network game, \textbf{all players act simultaneously and they play only one round.}
+
+For each player $i$, the set of actions/controls/strategies that she is allowed to choose is denoted by $A^{(i)}$, which is a subset of $\mathbb{R}^{k_i}$ for some $k_i > 0$. We call $A^{(i)}$ the set of admissible controls/strategies associated to player $i$.
+We denote by $A = A^{(1)} \times A^{(2)} \times \cdots \times A^{(N)}$ the set of admissible controls for all $N$ players. For any $\balpha \in A$, we denote by $\balpha = (\alpha^1, \alpha^2,\ldots, \alpha^N)$ with $\alpha^i \in A^{(i)}$ and call it a \textbf{strategy profile} for all players in $V$.
+
+We also associate to each player $i \in V$ a cost function 
+$$
+J^{i}: A \ni \balpha \mapsto J^{i}(\balpha) = J^{i}(\alpha^i, \alpha^{-i}) \in \mathbb{R}
+$$ 
+where $\alpha^{-i} =(\alpha^1, \ldots, \alpha^{i-1}, \alpha^{i+1}, \ldots,\alpha^N)$. 
+
+\begin{definition}
+	For each player $i \in V$, the \textbf{best responses of player $i$} to other players using strategy $\alpha^{-i} = (\alpha^1, \ldots, \alpha^{i-1}, \alpha^{i+1}, \ldots,\alpha^N)$ is a subset in $A^{(i)}$, denoted by $br^{i}(\alpha^{-i})$ such that any $\alpha^{i,*} \in br^{i}(\alpha^{-i})$ minimizes the associate cost function $J^{i}(\cdot, \alpha^{-i})$ of player $i$, namely
+	\begin{equation}
+	\alpha^{i,*} \in \argmin_{\alpha^i \in A^{(i)}} J^{i}(\alpha^i, \alpha^{-i}).
+	\end{equation}
+\end{definition}
+
+We define the notion of Nash equilibrium as follow:
+\begin{definition}
+	Let $\balpha^* \in A$ be a strategy profile for $N$ players. The best response function $br$ for all players in $V$ is defined as
+	\begin{equation}
+	br: A \ni \balpha=(\alpha^1, \ldots, \alpha^N) \mapsto br(\balpha) = br^{1}(\alpha^{-1}) \times br^{2}(\alpha^{-2})\times \cdots \times br^{N}(\alpha^{-N}) \subset A.
+	\end{equation}
+	A strategy profile $\balpha^*$ is said to be a fixed point of the map $br$ if  
+	\begin{equation}
+	\balpha^*  \in br(\balpha^*). 
+	\end{equation}	
+	We say that $\balpha^*$ is a \textbf{Nash equilibrium} if it is a fixed point for the best response function $br$. Consequently, for each $i \in V$ we can have
+	\begin{equation}
+	J^i(\balpha^*) \leq J^i(\alpha^i, \alpha^{-i,*}), \qquad \text{for all } \alpha^i \in A^{(i)}.
+	\end{equation}
+	The collection of all Nash equilibria is denoted by a set $\mathcal{N} \subset A$:
+	\begin{equation}
+	\mathcal{N} = \{ \balpha \in A : \balpha \in br(\balpha) \}.
+	\end{equation}
+\end{definition}
+
+
+\subsection{Social cost and Price of Anarchy}
+
+\begin{definition}
+	We define the \textbf{social cost} of a strategy profile $\balpha \in A$ the sum of cost $(J^i)_{i\in V}$ evaluated at point $\balpha$, i.e.
+	\begin{equation}
+	J(\balpha) = \sum_{i=1}^N J^{i}(\balpha) = \sum_{i=1}^N J^i(\alpha^i, \alpha^{-i}).
+	\end{equation}
+	A strategy profile $\alpha$ that minimizes the social cost among all admissible strategies $A$ of $N$ players is called the \textbf{social optimal}, and it is denote by 
+	\begin{equation}
+	\balpha^{*,SC} =  \argmin_{\balpha \in A} J(\balpha)
+	\end{equation}
+\end{definition}
+
+We will give a definition of the Price of Anarchy that measures the inefficiency of selfish behavior among players in the above static network game. In another words, the extra cost (in ratio) raised in the situation that every player optimizes her own strategy (through the corresponding cost function) without considering the effect of such strategy on her peers.
+\begin{definition}
+	The \textbf{Price of Anarchy} (PoA) in a static network game described above is defined as the ratio between the worst social cost of a Nash equilibrium and the optimal social cost among all admissible strategy profiles, namely
+	\begin{equation}
+	PoA = \frac{\sup_{\balpha \in \mathcal{N}} J(\balpha)}{ \inf_{\balpha \in A} J(\balpha)} = \frac{\sup \{ J(\alpha^*) : \alpha^* \in \mathcal{N} \} }{J(\balpha^{*,SC}) }
+	\end{equation}
+\end{definition} 
+
+A similar notion to the Price of Anarchy is the \textbf{Price of Stability} (PoS). It is defined the ratio between the best social cost of a Nash equilibrium and the optimal social cost among all admissible strategy profiles:
+\begin{equation}
+PoS = \frac{\inf_{\balpha \in \mathcal{N}} J(\balpha) }{ \inf_{\balpha \in A} J(\alpha)} = \frac{\inf\{ J(\balpha^*) : \balpha^* \in \mathcal{N} \}}{J(\balpha^{*,SC})}.
+\end{equation}
+For example, in most network applications, agents are interacting under the restriction of some protocol that will lead to a collective solutions of all participants, who can choose either accept it or defect from it. As a result, it will become more interesting for the protocol designer to find the best Nash equilibrium, which can be view as an optimal stable solution subject to the protocol. 
+

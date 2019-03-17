@@ -1,0 +1,207 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+
+\usepackage{amssymb, amsmath}
+\usepackage{graphicx, color, float}
+\usepackage{bbm}
+\usepackage{amsthm}
+%\usepackage[]{hyperref}
+\usepackage{cite}			% Use special characters
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+%\usepackage{adjustbox, caption}
+\textheight 9.5 in
+\textwidth 6.5 in
+\topmargin -0.7 in
+\oddsidemargin -0.2 in
+\renewcommand{\baselinestretch} {1.2}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+\renewcommand{\textfraction}{0}
+\renewcommand{\floatpagefraction}{0.90}
+\renewcommand{\sp}{\hspace*{0.3 in}}
+\definecolor{orange}{rgb}{1, 0.39, 0.03}%{0.97, 0.32, 0.84}
+\newcommand{\m}[1]{\textcolor{magenta}{ #1}}
+\renewcommand{\r}[1]{\textcolor{red}{ #1}}
+\renewcommand{\b}[1]{\textcolor{blue}{ #1}}
+\newcommand{\g}[1]{\textcolor{green}{ #1}}
+\renewcommand{\o}[1]{\textcolor{orange}{ #1}}
+
+\newcommand{\bfm}[1]{\ensuremath{\mathbf{#1}}}
+\def\ba{\bfm a}   \def\bA{\bfm A}  \def\AA{\mathbb{A}}  \def\calA{{\cal  A}} \def\cA{{\cal  A}}
+\def\bb{\bfm b}   \def\bB{\bfm B}  \def\BB{\mathbb{B}}  \def\calB{{\cal  B}} \def\cB{{\cal  B}}
+\def\bc{\bfm c}   \def\bC{\bfm C}  \def\CC{\mathbb{C}}  \def\calC{{\cal  C}} \def\cC{{\cal  C}}
+\def\bd{\bfm d}   \def\bD{\bfm D}  \def\DD{\mathbb{D}}  \def\calD{{\cal  D}} \def\cD{{\cal  D}}
+\def\be{\bfm e}   \def\bE{\bfm E}  \def\EE{\mathbb{E}}  \def\calE{{\cal  E}} \def\cE{{\cal  E}}
+\def\bff{\bfm f}  \def\bF{\bfm F}  \def\FF{\mathbb{F}}  \def\calF{{\cal  F}} \def\cF{{\cal  F}}
+\def\bg{\bfm g}   \def\bG{\bfm G}  \def\GG{\mathbb{G}}  \def\calG{{\cal  G}} \def\cG{{\cal  G}}
+\def\bh{\bfm h}   \def\bH{\bfm H}  \def\HH{\mathbb{H}}  \def\calH{{\cal  H}} \def\cH{{\cal  H}}
+\def\bi{\bfm i}   \def\bI{\bfm I}  \def\II{\mathbb{I}}  \def\calI{{\cal  I}} \def\cI{{\cal  I}}
+\def\bj{\bfm j}   \def\bJ{\bfm J}  \def\JJ{\mathbb{J}}  \def\calJ{{\cal  J}} \def\cJ{{\cal  J}}
+\def\bk{\bfm k}   \def\bK{\bfm K}  \def\KK{\mathbb{K}}  \def\calK{{\cal  K}} \def\cK{{\cal  K}}
+\def\bl{\bfm l}   \def\bL{\bfm L}  \def\LL{\mathbb{L}}  \def\calL{{\cal  L}} \def\cL{{\cal  L}}
+\def\bm{\bfm m}   \def\bM{\bfm M}  \def\MM{\mathbb{M}}  \def\calM{{\cal  M}} \def\cM{{\cal  M}}
+\def\bn{\bfm n}   \def\bN{\bfm N}  \def\NN{\mathbb{N}}  \def\calN{{\cal  N}} \def\cN{{\cal  N}}
+\def\bo{\bfm o}   \def\bO{\bfm O}  \def\OO{\mathbb{O}}  \def\calO{{\cal  O}} \def\cO{{\cal  O}}
+\def\bp{\bfm p}   \def\bP{\bfm P}  \def\PP{\mathbb{P}}  \def\calP{{\cal  P}} \def\cP{{\cal  P}}
+\def\bq{\bfm q}   \def\bQ{\bfm Q}  \def\QQ{\mathbb{Q}}  \def\calQ{{\cal  Q}} \def\cQ{{\cal  Q}}
+\def\br{\bfm r}   \def\bR{\bfm R}  \def\RR{\mathbb{R}}  \def\calR{{\cal  R}} \def\cR{{\cal  R}}
+\def\bs{\bfm s}   \def\bS{\bfm S}  \def\SS{\mathbb{S}}  \def\calS{{\cal  S}} \def\cS{{\cal  S}}
+\def\bt{\bfm t}   \def\bT{\bfm T}  \def\TT{\mathbb{T}}  \def\calT{{\cal  T}} \def\cT{{\cal  T}}
+\def\bu{\bfm u}   \def\bU{\bfm U}  \def\UU{\mathbb{U}}  \def\calU{{\cal  U}} \def\cU{{\cal  U}}
+\def\bv{\bfm v}   \def\bV{\bfm V}  \def\VV{\mathbb{V}}  \def\calV{{\cal  V}} \def\cV{{\cal  V}}
+\def\bw{\bfm w}   \def\bW{\bfm W}  \def\WW{\mathbb{W}}  \def\calW{{\cal  W}} \def\cW{{\cal  W}}
+\def\bx{\bfm x}   \def\bX{\bfm X}  \def\XX{\mathbb{X}}  \def\calX{{\cal  X}} \def\cX{{\cal  X}}
+\def\by{\bfm y}   \def\bY{\bfm Y}  \def\YY{\mathbb{Y}}  \def\calY{{\cal  Y}} \def\cY{{\cal  Y}}
+\def\bz{\bfm z}   \def\bZ{\bfm Z}  \def\ZZ{\mathbb{Z}}  \def\calZ{{\cal  Z}} \def\cZ{{\cal  Z}}
+\def\bzero{\bfm 0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Boldfaces in Greek %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bfsym}[1]{\ensuremath{\boldsymbol{#1}}}
+
+ \def\balpha{\bfsym \alpha}
+ \def\bbeta{\bfsym \beta}
+ \def\bgamma{\bfsym \gamma}             \def\bGamma{\bfsym \Gamma}
+ \def\bdelta{\bfsym {\delta}}           \def\bDelta {\bfsym {\Delta}}
+ \def\bfeta{\bfsym {\eta}}              \def\bfEta {\bfsym {\Eta}}
+ \def\bmu{\bfsym {\mu}}                 \def\bMu {\bfsym {\Mu}}
+ \def\bnu{\bfsym {\nu}}
+ \def\btheta{\bfsym {\theta}}           \def\bTheta {\bfsym {\Theta}}
+ \def\beps{\bfsym \varepsilon}          \def\bepsilon{\bfsym \varepsilon}
+ \def\bsigma{\bfsym \sigma}             \def\bSigma{\bfsym \Sigma}
+ \def\blambda {\bfsym {\lambda}}        \def\bLambda {\bfsym {\Lambda}}
+ \def\bomega {\bfsym {\omega}}          \def\bOmega {\bfsym {\Omega}}
+ \def\brho   {\bfsym {\rho}}
+ \def\btau{\bfsym {\tau}}
+ \def\bxi{\bfsym {\xi}}
+ \def\bzeta{\bfsym {\zeta}}
+% May add more in future.
+
+%\def\cov{\mathrm{cov}}
+%\def\var{\mathrm{var}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator{\corr}{corr}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Dev}{Dev}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\logit}{logit}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\RSS}{RSS}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\SE}{SE}
+\DeclareMathOperator{\tr}{tr}
+
+\def\hat{\widehat}
+
+\makeatletter
+\def\singlespace{\def\baselinestretch{1}\@normalsize}
+\def\endsinglespace{}
+
+\newcommand{\fig}[3]{\begin{figure}[htbp]        %
+        \centerline{\includegraphics[width= #3 \textwidth]{Figs/#1}}     %
+        \small                                   %
+        \begin{singlespace}                      %
+        \caption{#2 \label{#1}}                  %
+        \end{singlespace}                        %
+        \end{figure}}
+
+
+%%%%%%%%%%%%%%%%%%%%% Addition Definitions%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{fooyear} \setcounter{fooyear}{\the\year}
+
+\theoremstyle{remark}
+\newtheorem{remark}{\textbf{Remark}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{theorem*}{Theorem*}
+\newtheorem{lemma}{Lemma}
+\newtheorem{assumption}{Assumption}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+
+\numberwithin{equation}{subsection}
+
+\begin{document}
+\begin{center}
+\hspace*{0.15 in} {\Large \bf ORF 569:  Special Topics in Statistics and Operations Research - Topics in Game Theory}\\
+           Ren\'e\  Carmona
+
+\end{center}
+
+\tableofcontents
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_2_5
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_2_5_Graph_centrality_measure}
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_2_7
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_2_7_Search_Nash_equilibrium}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_2_12 --14
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_2_12-14_Potential_game}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_2_19--21
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_2_19-21_Graphon_game}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_2_26-28
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_2_26-28_Graphon_game}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Day 2018_3_5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_3_5_LQ_graphon_game}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Day 2018_3_7
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2018_3_7_Auction}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Day 2019_3_12
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\input{2019_3_12_Continuum_of_players}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bibliographystyle{apalike}
+\bibliography{mybib}{}
+
+
+\end{document}
