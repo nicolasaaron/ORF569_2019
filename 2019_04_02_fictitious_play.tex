@@ -1,0 +1,155 @@
+\section{2019 04 02 Multi-stage games}
+ 
+\begin{definition}
+	A multi-stage game consists of the following components:
+	\begin{itemize}
+		\item A sequence $(0,\ldots,K)$ represents the stage of the game;
+		\item there are $N$ players who play repeatedly and chose their actions simultaneously at each stage of the game;
+		\item Each player observes the actions of all $N$ players in all previous stages;
+		\item For each stage $k\in \{0,\ldots, K\}$, the action profile of players is given by
+		$$
+			\underline{\alpha}_{k} = (\alpha_k^{1}, \ldots, \alpha_{k}^N)
+		$$
+		where $\alpha_{k}^i$ is the action chosen by player $i$ at stage $k$;
+		\item The available information prior to stage $k$, called \textit{history}, is defined as 
+		$$
+			h^k = (\underline{\alpha}_0, \ldots, \underline{\alpha}_{k-1});
+		$$
+		\item For every player $i$ at stage $k$, the feasible set of actions is denoted by
+		$ A^{i}(h^k)$, which depends on the information of history prior to stage $k$. For example, the resources that have been used in the past can affect the current actions of players. So, at stage $k$, the action chosen by player $i$ can be viewed as a function of history $h^k$;
+		
+		\item We would like to include \textit{``no  action"} as part of  $A^i(h^k)$ for every $i=1,\ldots,N$ and for every $k=0, \ldots, K$. When player $i$ choses ``no action", she is inactive at this stage.
+	\end{itemize}
+\end{definition}
+
+Here are some examples for multi-stage games:
+\begin{enumerate}
+	\item $K=0$, Cournot competition.
+	\item $K=1$, Stackelberg game. For example $N=2$, one player is called the leader, and the other called the follower. Then
+		\begin{itemize}
+			\item at stage $k=0$, leader chooses an action $\alpha_0 \in A^{leader}(\emptyset)$. The follower is inactive, namely $A^{follower}(\emptyset)=\{``no \, action" \}$. 
+			\item at stage $k=1$, leader is inactive $A^{leader}(h^1)=\{``no \, action" \}$ and the follower chooses an action $\alpha^{follower} \in A^{follower}(h^1)$ where $h^1 = ( (\alpha_0, ``no \, action") )$. 
+		\end{itemize}
+	\item $K=2$, Entry-deterrence game.
+			\begin{itemize}
+				\item at stage $k=0$, incumbent raises money $\alpha_0$, entrant ``no action";
+				\item at stage $k=1$, incumbent ``no action", entrant choses between ``enter" or ``not enter";
+				\item at stage $k=2$, Cournot competition.
+			\end{itemize}
+\end{enumerate}
+
+
+\begin{definition}
+	A pure strategy for player $i\in \{1,\ldots,N\}$ at stage $k\in \{0,\ldots, K\}$ is denoted by $\hat{\alpha}^i_k$.\\
+	A pure strategy profile, denoted by $\hat{\alpha}$, is the collection of pure strategies of all players at all stages except the last one $k=K$, namely
+	$$
+		\hat{\alpha} = (\hat{\alpha}^i_k)_{i=1,\ldots,N,\, k=0,\ldots,K-1}.
+	$$
+	It is said to be an admissible pure strategy profile if $\hat{\alpha}_k^i \in A^i(h^k)$ for all $k=0,\ldots, K-1$ and $i=1,\ldots,N$.
+\end{definition}
+
+\begin{remark}
+	A stage $k=K$, we collect everything and decide the reward or cost for players.
+\end{remark}
+
+
+\begin{definition}
+	The set of histories up to stage $k\in \{0,\ldots, K\}$ is denoted by $H(k)$. So $H(K)$ represents the set of all histories. For each player $i \in \{1,\ldots,N\}$, we associate her with a cost function $J^i: H(K) \to \RR$.
+\end{definition} 
+
+Very often, the cost function $J^i$ is addictive, i.e.
+$$
+J^i(h^K) = \sum_{k=0}^{K-1} c_{k} f^i(\alpha^i_k)
+$$  
+
+The coefficients $(c_k)_{k=0,\ldots,K-1}$ can be discounted factors, for example, $c_k = c_K \delta^k$ for some $c_K \in \RR$ and $\delta \in [0,1]$.
+
+When $K=\infty$, we need to make sure $\delta < 1$.
+
+\begin{definition}
+	A pure strategy profile $\hat{\alpha}$ is said to be a pure strategy Nash equilibrium if for every $i\in \{1,\ldots, N\}$, for every admissible sequence of actions $\balpha = (\alpha_0,\ldots,\alpha_{k-1}) $, 
+	$$
+		J^{i}(\underline{\hat{\alpha}}_0,\ldots, \underline{\hat{\alpha}}_{K-1} ) \leq J^i( (\alpha_0, \underline{\hat{\alpha}}_0^{-i}), \ldots, (\alpha_{K-1}, \underline{\hat{\alpha}}_{K-1}^{-i}) )
+	$$
+	where $(\alpha_k, \underline{\hat{\alpha}}_k^{-i}) = (\hat{\alpha}_k^1,\ldots, \hat{\alpha}_k^{i-1}, \alpha_k, \hat{\alpha}_{k}^{i+1}, \ldots, \hat{\alpha}_{k}^{N})$ is the action profile at stage $k$ for $k \in \{0,\ldots, K-1\}$.
+\end{definition}
+
+\begin{remark}
+	Given a strategy profile $\hat{\alpha}$ and a player $i$, a sequence of actions $\balpha = (\alpha_0, \ldots, \alpha_{K-1})$ is said to be admissible if for every $k=1, \ldots, K-1$,
+	$$
+		\alpha_{k} \in A^{i} (h^{k}_{\balpha})
+	$$
+	where $h^0_{\balpha} = \emptyset$ and $h^k_{\balpha} = ( (\alpha_0, \underline{\hat{\alpha}}_0^{-i}), \ldots, (\alpha_{k-1}, \underline{\hat{\alpha}}_{k-1}^{-i}) )$ 
+\end{remark}
+
+
+\begin{definition}
+	For every stage $k=0,\ldots,K$, let $G(h^k)$ be a new game depending on the history $h^k=(\underline{\alpha}_0, \ldots, \underline{\alpha}_{k-1})$. 
+	\begin{itemize}
+		\item The new strategy profile for $N$ players in game $G(h^k)$ is denoted by $\alpha_{h^k} = (\alpha_l^i)_{i=1,\ldots,N, \, l=k, k+1, \ldots, K-1}$ (similarly, $\hat{\alpha}_{h^k}$ for pure strategy profile);
+		\item The new history is denoted by $(h^k, \underline{\alpha}_k, \ldots, \underline{\alpha}_{K-1})$;
+		\item The new cost function is a mapping $(\underline{\alpha}_k, \ldots, \underline{\alpha}_{K-1}) \mapsto J^i(h^k, \underline{\alpha}_k, \ldots, \underline{\alpha}_{K-1})$
+	\end{itemize} 
+	A strategy profile $\hat{\alpha}$ is said to be a \textit{sub-game perfect Nash equilibrium} if for every $k\in \{0, \ldots,K\}$, for every $h^k \in H(k)$, the strategy profile $(\hat{\alpha}_l^i)_{i=1,\ldots,N,\, l=k,\ldots,K-1}$ is a Nash equilibrium for the sub game $G(h^k)$.
+	
+	In words, at every stage $k$, whatever the history is, if players play according to the strategy profile $(\hat{\alpha}_l^i)_{i=1,\ldots,N,\, l=k,\ldots,K-1}$ afterwards, then they are in a Nash equilibrium associated to the new game.
+	 
+\end{definition}
+
+
+
+\begin{remark}
+	We need to clarify the notion of closed loop strategy and open loop strategy. Let $\alpha_k^i$ be the action taken by player $i$ at stage $k$. For the sake of simplicity, we assume that $A^i(h^k) = \mathbb{R}$ for every $h^k \in H(k)$ for every $k = 0,\ldots, K$. 	
+	\begin{itemize}
+		\item $\alpha^i_k$ is said to be an open loop strategy if there exists a function $\varphi^i : \{0,\ldots,K\} \to \RR$ such that $\alpha_k^i = \varphi^i(k)$ for every $k= 0, \ldots K$. The function $\varphi^i$ is decided before the game.
+		\item $\alpha_k^i$ is said to be a closed loop strategy if there exists a function $\varphi_k^i : H(k) \to \mathbb{R}$ such that $\alpha_k^i = \varphi_k^i(h^k)$ for some $h^k \in H(k)$. 
+	\end{itemize} 
+	It will be rare for open loop strategy profile to have a sub-game perfect Nash equilibrium.
+\end{remark}
+
+
+\subsection{Prisoner's dilemma}
+
+Assume that there are only two players $N=2$, and the feasible set of actions are $A_1 = A_2 = \{C,D\}$ for every stage $k$ of the game. Here $C$ stands for cooperation and $D$ stands for defection.
+
+Let $T< R <P < S$ where $T, R,P,S \in \RR$ and $T$ stands for \textit{temptation}, $R$ stands for  \textit{negative rewards} or \textit{cost} , $P$ stands for \textit{punishment}, and $S$ stands for \textit{sucker}. 
+Assume that the cost functions are defined as follow (see also the table \ref{table:fictitious_play_prisoner_dilemma}):
+$$
+J^1(\alpha_1, \alpha_2) = \mathbbm{1}_{\alpha_1 = C} (R \mathbbm{1}_{\alpha_2 = C} + T \mathbbm{1}_{\alpha_2 = D} ) + \mathbbm{1}_{\alpha_1 = D} (S \mathbbm{1}_{\alpha_2=C} + P \mathbbm{1}_{\alpha_2=D} )
+$$
+and
+$$
+J^2(\alpha_1, \alpha_2) = \mathbbm{1}_{\alpha_2 = C} (R \mathbbm{1}_{\alpha_1 = C} + T \mathbbm{1}_{\alpha_1 = D} ) + \mathbbm{1}_{\alpha_2 = D} (S \mathbbm{1}_{\alpha_1=C} + P \mathbbm{1}_{\alpha_1=D} ).
+$$
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+	\hline
+	 $\text{player 2} \backslash \text{palyer 1}$& C & D \\
+	 \hline
+	 C & $(R,R)$ & $(T,S)$\\
+	 \hline
+	 D & $(S,T)$ & $(P,P)$\\
+	 \hline
+\end{tabular}
+\caption{the cost function table. The tuple $(J^1(\cdot), J^2(\cdot))$ represents the costs of player 1 and player 2 in different situation. The column names represent the strategies chosen by player $1$ and the row names are for player 2.}
+\label{table:fictitious_play_prisoner_dilemma}
+\end{table}
+
+The objective of players are to minimize their own cost function. We observe that the choice of relationships $T<R$ and $P<S$ imply that the defection is a preferable strategy for both player $1$ and $2$.
+
+It can be verified that the strategy $(D,D)$ is a Nash equilibrium.
+
+\begin{lemma}
+	The strategy profile $((D,D), \ldots, (D,D))$ is a sub-game perfect Nash equilibrium.
+\end{lemma}
+
+\begin{proof}
+	Step 1: If I am looking for a sub-game perfect Nash equilibrium, the last choice should be $(D,D)$ whatever the history is.
+	
+	Step 2: One step perturbation principle (for sub-game perfect Nash equilibrium) for the induction part of the proof.
+\end{proof}
+
+\begin{remark}
+	The result may be different if the number of stages equals to infinity, i.e. $K=\infty$.
+\end{remark}

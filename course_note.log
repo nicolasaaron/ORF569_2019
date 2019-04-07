@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.2.10)  17 MAR 2019 04:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.2.10)  6 APR 2019 21:06
 entering extended mode
 **./course_note.tex
 (course_note.tex
@@ -445,39 +445,84 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-[47] [48] [49] [50]) [51] (course_note.bbl) [52] (course_note.aux) ) 
+[47] [48] [49] [50]) [51] (2019_3_26_28_Fubini_extensions.tex [52] [53]
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+LaTeX Font Info:    Try loading font information for U+euf on input line 170.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\ueuf.fd"
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+) [55] [56] [57]
+
+LaTeX Warning: Reference `ch:measures' on page 58 undefined on input line 294.
+
+
+LaTeX Warning: Reference `le:skorohod' on page 58 undefined on input line 294.
+
+[58]
+Underfull \hbox (badness 10000) in paragraph at lines 362--366
+
+ []
+
+[59] [60] [61]) [62] (2019_04_02_fictitious_play.tex [63]
+Overfull \hbox (10.3495pt too wide) in paragraph at lines 78--79
+[]\OT1/cmr/bx/it/12 Remark \OT1/cmr/m/n/12 31\OT1/cmr/m/it/12 . []\OT1/cmr/m/n/
+12 Given a strat-egy pro-file $[]$ and a player $\OML/cmm/m/it/12 i$\OT1/cmr/m/
+n/12 , a se-quence of ac-tions $[] = (\OML/cmm/m/it/12 []; [] ; []\OT1/cmr/m/
+n/12 )$
+ []
+
+
+Overfull \hbox (47.97304pt too wide) in paragraph at lines 89--90
+[]\OT1/cmr/m/n/12 The new strat-egy pro-file for $\OML/cmm/m/it/12 N$ \OT1/cmr/
+m/n/12 play-ers in game $\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 h[
+]\OT1/cmr/m/n/12 )$ is de-noted by $\OML/cmm/m/it/12 [] \OT1/cmr/m/n/12 = (\OM
+L/cmm/m/it/12 []\OT1/cmr/m/n/12 )[]$
+ []
+
+[64]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[65]) [66] (course_note.bbl) [67] (course_note.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4018 strings out of 493333
- 54118 string characters out of 3139197
- 129721 words of memory out of 3000000
- 7424 multiletter control sequences out of 15000+200000
- 13366 words of font info for 50 fonts, out of 3000000 for 9000
+ 4054 strings out of 493333
+ 54805 string characters out of 3139197
+ 129887 words of memory out of 3000000
+ 7449 multiletter control sequences out of 15000+200000
+ 14074 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,12n,26p,867b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\
-iris\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\public\bbm\dpi600\bbm12.pk><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/
-cmmib6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmm
-ib8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symb
-ols/msbm7.pfb>
-Output written on course_note.pdf (52 pages, 423846 bytes).
+ 40i,19n,26p,1092b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\iris\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\public\bbm\dpi600\bb
+m12.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cmextra/cmmib6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cmextra/cmmib8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/euler/eufm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/symbols/msbm7.pfb>
+Output written on course_note.pdf (67 pages, 492150 bytes).
 PDF statistics:
- 257 PDF objects out of 1000 (max. 8388607)
+ 309 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
